@@ -19,8 +19,11 @@
     /**
      * Private helper method for making the ajax request
      *
-     * @param {object}          Options/settings for current request
-     * @param {jquery object}   The jquery object where you can inject response content
+     * @param {object} context  The value of `this` provided for the callbacks
+     * @param {object} url      Remote url to request
+     * @param {object} options  Options/settings for current request
+     * @param {object} $target  The jquery target element to inject response
+     * @param {object} dataType Request data type (see $.ajax documentation)
      * @return {void}
      */
     function _retrieve(context, url, options, $target, dataType) {
