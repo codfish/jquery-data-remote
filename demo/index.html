@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>jQuery data-remote Demo</title>
+  <style type="text/css">
+    body {
+      font-family: 'helvetica-neue', helvetica, arial, sans-serif;
+      margin: 0 auto;
+      max-width: 700px;
+      padding: 20px;
+    }
+
+    pre {
+      background: #e7e7e7;
+      color: #333;
+      overflow-y: scroll;
+      padding: 10px;
+    }
+
+    h1 {
+      font-size: 2em;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    a {
+      color: #028482;
+      text-decoration: none;
+    }
+
+    hr {
+      margin: 30px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>jQuery data-remote Demo</h1>
+
+  <section class="code">
+    <h4>HTML</h4>
+
+    <pre>
+      &lt;h2&gt;Gists by codonnell822&lt;/h2&gt;
+
+      &lt;div data-remote data-url="https://api.github.com/users/codonnell822/gists"&gt;
+        &lt;script type="text/x-handlebars-template"&gt;
+          &lt;ul&gt;
+            {{#each this}}
+              &lt;li&gt;
+                &lt;h3&gt;&lt;a href="{{ html_url }}"&gt;{{ html_url }}&lt;/a&gt;&lt;/h3&gt;
+                &lt;p&gt;{{ description }}&lt;/p&gt;
+                &lt;p&gt;
+                  &lt;strong&gt;Created at:&lt;/strong&gt;
+                  &lt;time&gt;{{ formatDate created_at "MMMM DD, YYYY" }}&lt;/time&gt;
+                &lt;/p&gt;
+              &lt;/li&gt;
+            {{/each}}
+          &lt;/ul&gt;
+        &lt;/script&gt;
+      &lt;/div&gt;
+    </pre>
+
+    <h4>JS</h4>
+
+    <pre>
+      &lt;script&gt;
+        $('[data-remote="true"]').dataRemote();
+      &lt;/script&gt;
+    </pre>
+  </section>
+  
+  <hr>
+
+  <section class="example">
+    <h2>Gists by codonnell822</h2>
+
+    <div data-remote="true" data-url="https://api.github.com/users/codonnell822/gists">
+      <script type="text/x-handlebars-template">
+        <ul>
+          {{#each this}}
+            <li>
+              <h3><a href="{{ html_url }}" target="_blank">{{ html_url }}</a></h3>
+              <p>{{ description }}</p>
+              <p>
+                <strong>Created at:</strong>
+                <time>{{ formatDate created_at "MMMM DD, YYYY" }}</time>
+              </p>
+            </li>
+          {{/each}}
+        </ul>
+      </script>
+    </div>
+  </section>
+
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.js"></script>
+  <script type="text/javascript" src="../src/jquery-data-remote.js"></script>
+  <script>
+    /**
+     * Format an ISO date using Moment.js
+     *
+     * @link https://gist.github.com/codonnell822/975d47ce09635d2e4cce
+     */
+    Handlebars.registerHelper('formatDate', function(context, block, published) {
+      // if the date variable sent in is a number, assume its a timestamp
+      // if timestamp is in seconds, convert to ms for javascript
+      if (typeof context === 'number' && (new Date(context)).getFullYear() === 1970) {
+        context = context * 1000;
+      }
+    
+      if (window.moment) {
+        var myDate = new Date(context);
+    
+        // displays local time for last modified, returns exact time for events
+        if (published == 'published') {
+          return moment(myDate).format(block);
+        } else{
+          // return UTC time of event
+          return moment.utc(myDate).format(block);
+        }
+      } else {
+        return '';   //  moment plugin not available. return empty string
+      };
+    });
+
+    $('[data-remote="true"]').dataRemote();
+  </script>
+</body>
+</html>
