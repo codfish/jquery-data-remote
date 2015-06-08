@@ -45,9 +45,6 @@
         // Use handlebars if the option is set to true _OR_
         // if a handlebars template is found
         if (options.handlebars === true || $target.find('[type="text/x-handlebars-template"]').length) {
-          if (options.handlebarsTemplate) {
-            $handlebarsTemplate = $(options.handlebarsTemplate);
-          } else 
           $handlebarsTemplate = options.handlebarsTemplate
             ? $(options.handlebarsTemplate)
             : $target.find('[type="text/x-handlebars-template"]');
@@ -112,7 +109,7 @@
       if (options.loaderImg) {
         $target.prepend(String() +
           '<div class="loader-image" style="clear: both;">' +
-            '<img src="' + options.loaderImg + '" alt="Loading...">' + 
+            '<img src="' + options.loaderImg + '" alt="Loading...">' +
           '</div>'
         );
       }
