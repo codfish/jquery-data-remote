@@ -12,3 +12,12 @@ $ php -S localhost:8080
 ```
 
 Now to view the demo, go to [http://localhost:8080/demo](http://localhost:8080/demo)
+
+## To Do
+
+* Add build tools
+* Add support for POST requests
+* Add support for authenticated requests
+* Add support for multiple JS templating engines, not just handlebars
+* Add built-in support for paginating responses?
+* Add better error handling

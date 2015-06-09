@@ -22,51 +22,15 @@
       debug: false,
       eventType: 'load', // js event type to fire data request on (load, click, submit, mouseover, etc.)
       dataType: 'json', // data type that's expected in response from your request
-      type: 'GET', // type of request (GET or POST)
-      handlebars: false, // use handlebars to render the response?
-      handlebarsTemplate: null, // hb template selector. by default it will look inside target
+      type: 'GET', // type of request (currently only supports GET)
       target: null, // selector of the element where you want your response injected
+      handlebars: false, // use handlebars to render the response?
+      template: null, // handlebar templates' selector. by default it will look inside target
       loaderImg: null, // target selector for data response
       oneAndDone: true, // after the first time running, wont run again
       append: false, // append result to target element? default is to replace content
-      success: function($target, options, response) {
-        var source;
-        var template;
-        var html;
-        var $handlebarsTemplate;
-        var method;
-
-        $target.find('.loader-image').hide();
-
-        if (options.debug) {
-          $.fn.dataRemote.debug($target, response);
-        }
-
-        // Use handlebars if the option is set to true _OR_
-        // if a handlebars template is found
-        if (options.handlebars === true || $target.find('[type="text/x-handlebars-template"]').length) {
-          $handlebarsTemplate = options.handlebarsTemplate
-            ? $(options.handlebarsTemplate)
-            : $target.find('[type="text/x-handlebars-template"]');
-          source = $handlebarsTemplate.html();
-          template = Handlebars.compile(source);
-          html = template(response);
-        } else {
-          html = response;
-        }
-
-        // use proper jQuery method based on append option
-        // if append == true, append results to target element,
-        // or else replace inner html with results
-        method = options.append === true ? 'append' : 'html';
-        $target[method](html);
-      },
-      error: function($target, options, response, error) {
-        $target.find('.loader-image').hide();
-        if (options.debug) {
-          $.fn.dataRemote.debug($target, response, error);
-        }
-      },
+      success: successCallback, // gets passed 3 parameters ($target, options, response)
+      error: errorCallback, // gets passed 4 parameters ($target, options, response, error)
 
       /**
        * Callback that fires after the request is made (on success OR error)
@@ -83,19 +47,76 @@
       before: function($target) {}
     };
 
-    // Extend our default options with those provided.
+    // Extend our default options with those provided when instantiating
     var options = $.extend({}, defaults, opts);
 
     /**
-     * Private helper method for making the get request
+     * Default success callback for ajax requests.
+     *
+     * Handles hiding of loader image, debugging (if setting is true),
+     * and templating request response.
+     *
+     * @param  {jQuery} $target  jquery object containing the target element for the ajax response
+     * @param  {object} options  plugin options set during instantiation
+     * @param  {object} response data response from the ajax request
+     */
+    function successCallback($target, options, response) {
+      var source;
+      var template;
+      var html;
+      var $template;
+
+      $target.find('.loader-image').hide();
+
+      if (options.debug) {
+        $.fn.dataRemote.debug($target, response);
+      }
+
+      // Use handlebars if the option is set to true *or* if a handlebars template is found
+      if (options.handlebars === true || $target.find('[type="text/x-handlebars-template"]').length) {
+        $template = options.template ? $(options.template) : $target.find('[type="text/x-handlebars-template"]');
+        source = $template.html();
+        template = Handlebars.compile(source);
+        html = template(response);
+      } else {
+        html = response;
+      }
+
+      // use proper jQuery method based on append option
+      // if append == true, append results to target element,
+      // or else replace inner html with results
+      var method = options.append === true ? 'append' : 'html';
+      $target[method](html);
+    }
+
+    /**
+     * Default error callback for ajax requests
+     *
+     * Hides the loader image, triggers debugging if it's turned on.
+     *
+     * @param  {jQuery} $target  jquery object containing the target element for the ajax response
+     * @param  {object} options  plugin options set during instantiation
+     * @param  {object} response data response from the ajax request
+     * @param  {string} error    textual portion of the HTTP status, i.e. "Not Found" or "Internal Server Error."
+     */
+    function errorCallback($target, options, response, error) {
+      $target.find('.loader-image').hide();
+
+      if (options.debug) {
+        $.fn.dataRemote.debug($target, response, error);
+      }
+    }
+
+    /**
+     * Private helper method for making a get request
      *
      * @param {object} url       url to query
      * @param {object} settings  Additional settings for the request
      * {
-     *    @param {object} context   the value of `this` provided for the callbacks
-     *    @param {object} options   options for current request
-     *    @param {object} $target   the jquery target element to inject response
-     *    @param {object} dataType  request data type (see $.ajax documentation)
+     *    @param {object} context  the value of `this` provided for the callbacks
+     *    @param {object} options  options for current request
+     *    @param {object} $target  the jquery target element to inject response
+     *    @param {object} dataType request data type (see $.ajax documentation)
      * }
      * @return {void}
      */
@@ -188,6 +209,6 @@
       }
       window.console.log('------------');
     }
-  }
+  };
 
 }(jQuery, window));
