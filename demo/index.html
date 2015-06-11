@@ -39,40 +39,7 @@
 <body>
   <h1>jQuery data-remote Demo</h1>
 
-  <section class="code">
-    <h4>HTML</h4>
-
-    <pre>
-      &lt;h2&gt;Gists by codonnell822&lt;/h2&gt;
-
-      &lt;div data-remote data-url="https://api.github.com/users/codonnell822/gists"&gt;
-        &lt;script type="text/x-handlebars-template"&gt;
-          &lt;ul&gt;
-            {{#each this}}
-              &lt;li&gt;
-                &lt;h3&gt;&lt;a href="{{ html_url }}"&gt;{{ html_url }}&lt;/a&gt;&lt;/h3&gt;
-                &lt;p&gt;{{ description }}&lt;/p&gt;
-                &lt;p&gt;
-                  &lt;strong&gt;Created at:&lt;/strong&gt;
-                  &lt;time&gt;{{ formatDate created_at "MMMM DD, YYYY" }}&lt;/time&gt;
-                &lt;/p&gt;
-              &lt;/li&gt;
-            {{/each}}
-          &lt;/ul&gt;
-        &lt;/script&gt;
-      &lt;/div&gt;
-    </pre>
-
-    <h4>JS</h4>
-
-    <pre>
-      &lt;script&gt;
-        $('[data-remote="true"]').dataRemote();
-      &lt;/script&gt;
-    </pre>
-  </section>
-  
-  <hr>
+  <iframe width="100%" height="300" src="//jsfiddle.net/codfish/hxgw9pg7/embedded/html,js/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
   <section class="example">
     <h2>Gists by codonnell822</h2>
@@ -111,10 +78,10 @@
       if (typeof context === 'number' && (new Date(context)).getFullYear() === 1970) {
         context = context * 1000;
       }
-    
+
       if (window.moment) {
         var myDate = new Date(context);
-    
+
         // displays local time for last modified, returns exact time for events
         if (published == 'published') {
           return moment(myDate).format(block);
@@ -124,7 +91,7 @@
         }
       } else {
         return '';   //  moment plugin not available. return empty string
-      };
+      }
     });
 
     $('[data-remote="true"]').dataRemote();
