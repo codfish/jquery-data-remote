@@ -51,10 +51,6 @@
             <li>
               <h3><a href="{{ html_url }}" target="_blank">{{ html_url }}</a></h3>
               <p>{{ description }}</p>
-              <p>
-                <strong>Created at:</strong>
-                <time>{{ formatDate created_at "MMMM DD, YYYY" }}</time>
-              </p>
             </li>
           {{/each}}
         </ul>
@@ -62,38 +58,11 @@
     </div>
   </section>
 
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.js"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.js"></script>
   <script type="text/javascript" src="../src/jquery-data-remote.js"></script>
   <script>
-    /**
-     * Format an ISO date using Moment.js
-     *
-     * @link https://gist.github.com/codonnell822/975d47ce09635d2e4cce#file-handlebars-helpers-js-L100
-     */
-    Handlebars.registerHelper('formatDate', function(context, block, published) {
-      // if the date variable sent in is a number, assume its a timestamp
-      // if timestamp is in seconds, convert to ms for javascript
-      if (typeof context === 'number' && (new Date(context)).getFullYear() === 1970) {
-        context = context * 1000;
-      }
-
-      if (window.moment) {
-        var myDate = new Date(context);
-
-        // displays local time for last modified, returns exact time for events
-        if (published == 'published') {
-          return moment(myDate).format(block);
-        } else{
-          // return UTC time of event
-          return moment.utc(myDate).format(block);
-        }
-      } else {
-        return '';   //  moment plugin not available. return empty string
-      }
-    });
-
     $('[data-remote="true"]').dataRemote();
   </script>
 </body>
