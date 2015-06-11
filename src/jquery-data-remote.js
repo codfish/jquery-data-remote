@@ -146,8 +146,8 @@
           options.complete.call($context, $target);
         },
         error: function(response, status, error) {
-          options.error.call($context, target, options, response, error);
-          options.complete.call($context, target);
+          options.error.call($context, $target, options, response, error);
+          options.complete.call($context, $target);
         }
       });
     }
