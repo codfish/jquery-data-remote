@@ -70,7 +70,16 @@ Almost all options can be set via html5 data attributes, or passed into the plug
 
 1) Here's an example with 3 elements getting initialized together, but showing the ability to override options with data attributes.
 
-  - First, here's the plugin 
+  - First, here's the plugin initialization. Initialize all of the `.get-news` elements with data remote options you want.
+
+  ```js
+  $(document).ready(function() {
+    $('.get-news').dataRemote({
+      url: 'http://api.example.com/news',
+    });
+  });
+  ```
+
   - Here's the first element, a wrapper element with no data attributes. Leverages the default options of the plugin, as well as the options you specify below in the plugin call.
 
   ```html
@@ -111,14 +120,6 @@ Almost all options can be set via html5 data attributes, or passed into the plug
     Display Funny News Instead
   </a>
   ```
-
-Initialize all of the .get-news elements with data remote options you want.
-
-```js
-  $('.get-news').dataRemote({
-    url: 'http://api.example.com/news',
-  });
-```
 
 ## Demo
 
