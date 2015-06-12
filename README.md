@@ -16,6 +16,13 @@ bower install jquery-data-remote --save
 npm install jquery-data-remote --save
 ```
 
+#### CDN
+
+```html
+<script src="/path/to/jquery.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-data-remote/0.4.0/jquery.data-remote.min.js"></script>
+```
+
 #### Script Include
 
 Simply include script after the jQuery library:
@@ -29,10 +36,7 @@ Simply include script after the jQuery library:
 
 Option | Type | Default | Description
 ------ | ---- | ------- | -----------
-before | function | function($target) {} | Before callback. Fires directly before the request is made. Default is an empty function.
-complete | function | function($target) {} | Complete callback. Fires after request, on success or error. Default is an empty function.
 data | object | {} | Request data. If this is passed as a html5 attribute, it needs to be a valid JSON string (e.g. `<div data-data='{"count": 20}'></div>`).
-error | function | errorCallback($target, options, response, error) | Error callback. Fires if the ajax request fails. Takes 4 arguments. Default error callback (`errorCallback()`) handles error reporting is `debug` is true.
 dataType | string | 'json' | The type of response data you're expecting. Can be any dataType value supported by (jQuery.ajax)[http://api.jquery.com/jquery.ajax/].
 debug | boolean | false | Turn debugging on/off.
 eventType | string | 'load' | The event type to fire data request on. Can be any event type that is supported by jQuery, including custom events.
@@ -41,11 +45,19 @@ loaderImg | string | '' | Image src to an optional loader image.
 method | string | 'GET' | The HTTP method to use for the request (e.g. "POST", "GET", "PUT") Can be any request type supported by jQuery.
 oneAndDone | boolean | true | Whether to remove the event binding after the initial request.
 placement | string | 'html' | Where to inject response relative to target (uses jQuery DOM insertion methods. Can be 'html', 'append', 'prepend', 'before' or 'after').
-success | function | successCallback($target, options, response) | Success callback. Fires on the success of the ajax request. Takes 3 arguments. The default success callback (`successCallback()`) handles templating the response.
 target | string | $(element) | Selector of the element where you want your response injected.
 template | string | '' | Selector of the handlebars template. Default it will look inside target element for the template.
 type | string | 'GET' | Alias for method.
 url | string | null | **REQUIRED** API Request URL. Can be absolute or relative. Cross browser requests obviously adhere to CORS. For cross browser requests, you must either set the `dataType` option to `jsonp` or the API request must be to a public api/endpoint.
+
+## Callbacks
+
+Callback | Type | Default | Description
+-------- | ---- | ------- | -----------
+before | function | function($target) {} | Before callback. Fires directly before the request is made. Default is an empty function.
+complete | function | function($target) {} | Complete callback. Fires after request, on success or error. Default is an empty function.
+error | function | errorCallback($target, options, response, error) | Error callback. Fires if the ajax request fails. Takes 4 arguments. Default error callback (`errorCallback()`) handles error reporting is `debug` is true.
+success | function | successCallback($target, options, response) | Success callback. Fires on the success of the ajax request. Takes 3 arguments. The default success callback (`successCallback()`) handles templating the response.
 
 ## Usage
 
