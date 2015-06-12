@@ -148,7 +148,7 @@
       _options.eventType = $element.data('event-type') || options.eventType;
       _options.type = $element.data('type') || options.type;
       _options.url = $element.data('url') || options.url;
-      _options.data = $element.data('data') ? JSON.parse($element.data('data')) : options.data;
+      _options.data = $element.data('data') ? $element.data('data') : options.data;
       _options.oneAndDone = !!$element.data('one-and-done') || options.oneAndDone;
       _options.handlebars = !!$element.data('handlebars') || options.handlebars;
       _options.template = $element.data('template') || options.template;
