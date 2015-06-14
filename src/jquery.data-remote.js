@@ -149,12 +149,12 @@
       _options.type = $element.data('type') || options.type;
       _options.url = $element.data('url') || options.url;
       _options.data = $element.data('data') ? $element.data('data') : options.data;
-      _options.oneAndDone = !!$element.data('one-and-done') || options.oneAndDone;
-      _options.handlebars = !!$element.data('handlebars') || options.handlebars;
       _options.template = $element.data('template') || options.template;
       _options.placement = $element.data('response-placement') || options.placement;
-      _options.debug = !!$element.data('debug') || options.debug;
       _options.target = $element.data('target') || options.target;
+      _options.debug = element.hasAttribute('data-debug') ? $element.data('debug') : options.debug;
+      _options.oneAndDone = element.hasAttribute('data-one-and-done') ? $element.data('one-and-done') : options.oneAndDone;
+      _options.handlebars = element.hasAttribute('data-handlebars') ? $element.data('handlebars') : options.handlebars;
 
       // if no target selector is given, default to actual element
       var $target = _options.target ? $(_options.target) : $element;
