@@ -141,9 +141,9 @@
     return this.each(function(idx, element) {
       var $element = $(element);
 
-      // set a local scope options variable for each element and
-      // override options from data attributes of said element if set
-      var _options = options;
+      // Create a local copy of the options for each element. This will allow each
+      // individual element to override options from its' data attributes.
+      var _options = $.extend({}, options);
       _options.dataType = $element.data('response-type') || options.dataType;
       _options.eventType = $element.data('event-type') || options.eventType;
       _options.type = $element.data('type') || options.type;
