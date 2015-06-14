@@ -82,10 +82,10 @@
      *
      * Hides the loader image, triggers debugging if it's turned on.
      *
-     * @param  {jQuery} $target  jquery object containing the target element for the ajax response
-     * @param  {object} options  plugin options set during instantiation
-     * @param  {object} response data response from the ajax request
-     * @param  {string} error    textual portion of the HTTP status, i.e. "Not Found" or "Internal Server Error."
+     * @param  {jQuery} $target   jquery object containing the target element for the ajax response
+     * @param  {object} options   plugin options set during instantiation
+     * @param  {object} response  data response from the ajax request
+     * @param  {string} error     textual portion of the HTTP status, i.e. "Not Found" or "Internal Server Error."
      */
     function errorCallback($target, options, response, error) {
       $target.find('.loader-image').hide();
@@ -96,19 +96,19 @@
     }
 
     /**
-     * Private helper method for making a get request
+     * Private helper method for making the ajax request
      *
-     * @param {object} url       url to query
-     * @param {object} settings  Additional settings for the request
+     * @param {object} url       request url
+     * @param {object} settings  additional settings for the request
      * {
-     *    @param {object} context  the value of `this` provided for the callbacks
-     *    @param {object} options  options for current request
-     *    @param {object} $target  the jquery target element to inject response
+     *    @param {jQuery} element  jQuery object containing the current data remote element
+     *    @param {object} options  data remote plugin options for current data remote element
+     *    @param {jQuery} $target  jQuery object containing the target element to inject response
      * }
      * @return {void}
      */
-    function get(url, settings) {
-      var $context = settings.context;
+    function fetch(url, settings) {
+      var $element = settings.element;
       var $target = settings.target;
       var options = settings.options;
 
@@ -121,6 +121,8 @@
         );
       }
 
+      // make the ajax request. Trigger the callbacks using $element as the
+      // context, making the value of `this` for the callbacks the $element
       $.ajax({
         url: url,
         data: options.data,
@@ -128,12 +130,12 @@
         dataType: options.dataType,
         cache: true,
         success: function(response) {
-          options.success.call($context, $target, options, response);
-          options.complete.call($context, $target);
+          options.success.call($element, $target, options, response);
+          options.complete.call($element, $target);
         },
         error: function(response, status, error) {
-          options.error.call($context, $target, options, response, error);
-          options.complete.call($context, $target);
+          options.error.call($element, $target, options, response, error);
+          options.complete.call($element, $target);
         }
       });
     }
@@ -165,14 +167,14 @@
         _options.before.call($element, $target);
 
         // execute ajax request immediately
-        get(_options.url, {
-          context: $element,
+        fetch(_options.url, {
+          element: $element,
           target: $target,
           options: _options,
         });
       } else {
         // use proper jQuery method based on oneAndDone option
-        var method = _options.oneAndDone === true ? 'one' : 'on';
+        var method = _options.oneAndDone ? 'one' : 'on';
 
         // bind to specific event type
         $element[method](_options.eventType, function(e) {
@@ -181,8 +183,8 @@
           // execute before request callback
           _options.before.call($element, $target);
 
-          get(_options.url, {
-            context: $element,
+          fetch(_options.url, {
+            element: $element,
             target: $target,
             options: _options,
           });
