@@ -37,7 +37,7 @@ Simply include script after the jQuery library:
 Option | Type | Default | Description
 ------ | ---- | ------- | -----------
 data | object | {} | Request data. If this is passed as a html5 attribute, it needs to be a valid JSON string (e.g. `<div data-data='{"count": 20}'></div>`).
-dataType | string | 'json' | The type of response data you're expecting. Can be any dataType value supported by (jQuery.ajax)[http://api.jquery.com/jquery.ajax/].
+dataType | string | 'json' | The type of response data you're expecting. Can be any dataType value supported by [jQuery.ajax](http://api.jquery.com/jquery.ajax/).
 debug | boolean | false | Turn debugging on/off.
 eventType | string | 'load' | The event type to fire data request on. Can be any event type that is supported by jQuery, including custom events.
 handlebars | boolean | false | Whether to use handlebars templating engine
