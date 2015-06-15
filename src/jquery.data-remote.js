@@ -177,8 +177,16 @@
         var method = _options.oneAndDone ? 'one' : 'on';
 
         // bind to specific event type
-        $element[method](_options.eventType, function(e) {
-          e.preventDefault();
+        $element[method](_options.eventType, function(evt) {
+          evt.preventDefault();
+
+          // if you're watching on keyup or change events, let's assume you want to
+          // send the value of the element as a query parameter.
+          // Think autosuggest search boxes.
+          // <input data-event-type="keyup" name="q" data-target="#search-results">
+          if (['keyup', 'change'].indexOf(evt.type) !== -1) {
+            _options.data[this.name] = this.value;
+          }
 
           // execute before request callback
           _options.before.call($element, $target);
