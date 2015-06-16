@@ -9,7 +9,7 @@
 ;(function($, window, undefined) {
   "use strict";
 
-  $.fn.dataRemote = function(opts) {
+  $.fn.dataRemote = function(opts = {}) {
     // Default Settings
     var defaults = {
       url: null, // request url
