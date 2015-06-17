@@ -1,3 +1,8 @@
+# v0.6.0
+
+- add build process with gulp, remove minified files from repo
+- minor cleanup to readme
+
 # v0.5.0
 
 - add element value to request data for keyup & change events [(0429450)](https://github.com/codonnell822/jquery-data-remote/commit/042945067ef2e266bb0caab4f8b4ad07295bb22b)
