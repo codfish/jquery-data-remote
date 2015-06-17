@@ -2,7 +2,7 @@
   "name": "jquery-data-remote",
   "version": "0.5.0",
   "description": "jQuery Data Remote is a plugin that simplifies the common task of making api/remote requests and injecting the response to the page. Optionally leverages Handlebars.js for templating.",
-  "main": "src/jquery.data-remote.js",
+  "main": "dist/jquery.data-remote.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -30,5 +30,8 @@
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0",
     "rimraf": "^2.4.0"
+  },
+  "scripts": {
+    "prepublish": "gulp build"
   }
 }
