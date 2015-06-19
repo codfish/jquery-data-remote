@@ -1,3 +1,8 @@
+# v0.6.1
+
+- add .npmignore file so dist folder isn't ignored by npm
+- add .editorconfig file for syntax formating
+
 # v0.6.0
 
 - add build process with gulp, remove minified files from repo
