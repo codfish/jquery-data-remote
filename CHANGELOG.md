@@ -1,3 +1,8 @@
+# v0.6.2
+
+- small readme changes
+- update bower jquery dependancy version
+
 # v0.6.1
 
 - add .npmignore file so dist folder isn't ignored by npm
