@@ -1,10 +1,12 @@
 /**
- * jQuery dataRemote Plugin
+ * jQuery Data Remote Plugin
  * http://github.com/codonnell822/jquery-dataremote
  * Copyright 2014-2015, Chris O'Donnell
  *
- * Plugin to help make handling ajax requests easier.
- * Name inspired by Ruby on Rails
+ * jQuery plugin that simplifies the common task of making api/remote requests
+ * and injecting the response to the page. Optionally leverages templating
+ * engines (handlebars). Inpired by ruby on rails' unobtrusive scripting adapter
+ * for jQuery (https://github.com/rails/jquery-ujs).
  */
 ;(function($, window, undefined) {
   "use strict";

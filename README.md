@@ -2,35 +2,12 @@
 
 jQuery Data Remote is a plugin that simplifies the common task of making api/remote requests and injecting the response to the page. Optionally leverages Handlebars.js for templating. Inpired by ruby on rails' unobtrusive scripting adapter for jQuery (https://github.com/rails/jquery-ujs).
 
-## Installation
+## Install
 
-#### Bower
-
-```sh
-bower install jquery-data-remote --save
-```
-
-#### NPM
-
-```sh
-npm install jquery-data-remote --save
-```
-
-#### CDN
-
-```html
-<script src="/path/to/jquery.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-data-remote/0.4.0/jquery.data-remote.min.js"></script>
-```
-
-#### Script Include
-
-Simply include script after the jQuery library:
-
-```html
-<script src="/path/to/jquery.js"></script>
-<script src="/path/to/jquery.data-remote.min.js"></script>
-```
+* [npm](http://npmjs.org/package/jquery-data-remote): `npm install --save jquery-data-remote`
+* [Bower](http://bower.io/): `bower install --save jquery-data-remote`
+* [cdnjs](https://cdnjs.com/libraries/jquery-data-remote)
+* [Download](https://github.com/codonnell822/jquery-data-remote/archive/v0.6.1.zip).
 
 ## Options
 
@@ -145,15 +122,3 @@ $ php -S localhost:8080
 ```
 
 Now to view the demo, go to [http://localhost:8080/demo](http://localhost:8080/demo)
-
-## To Do
-
-* Add build tools
-    - gulp
-    - minify script
-    - add node server, change demo instructions to use gulp serve rather than php built-in server
-* Add better support for POST requests (they're very possible, but should we make assumptions about the data to send by default? i.e. grab all form values)
-* Add support for authenticated requests
-* Add support for multiple JS templating engines, not just handlebars
-* Add built-in support for paginating responses?
-* Add better error handling
