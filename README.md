@@ -2,12 +2,14 @@
 
 jQuery Data Remote is a plugin that simplifies the common task of making api/remote requests and injecting the response to the page. Optionally leverages Handlebars.js for templating. Inpired by ruby on rails' unobtrusive scripting adapter for jQuery (https://github.com/rails/jquery-ujs).
 
+
 ## Install
 
 * [npm](http://npmjs.org/package/jquery-data-remote): `npm install --save jquery-data-remote`
 * [Bower](http://bower.io/): `bower install --save jquery-data-remote`
 * [cdnjs](https://cdnjs.com/libraries/jquery-data-remote)
 * [Download](https://github.com/codonnell822/jquery-data-remote/archive/v0.6.2.zip).
+
 
 ## Options
 
@@ -35,6 +37,7 @@ before | function | function($target) {} | Before callback. Fires directly befor
 complete | function | function($target) {} | Complete callback. Fires after request, on success or error. Default is an empty function.
 error | function | errorCallback($target, options, response, error) | Error callback. Fires if the ajax request fails. Takes 4 arguments. Default error callback (`errorCallback()`) handles error reporting is `debug` is true.
 success | function | successCallback($target, options, response) | Success callback. Fires on the success of the ajax request. Takes 3 arguments. The default success callback (`successCallback()`) handles templating the response.
+
 
 ## Usage
 
@@ -110,6 +113,7 @@ Almost all options can be set via html5 data attributes, or passed into the plug
   </a>
   ```
 
+
 ## Demo
 
 To view the demo, run the following:
@@ -122,3 +126,12 @@ $ php -S localhost:8080
 ```
 
 Now to view the demo, go to [http://localhost:8080/demo](http://localhost:8080/demo)
+
+
+## In Development
+
+1. Support for multiple templating engines
+1. Add better support for POST requests (they're very possible, but should we make assumptions about the data to send by default? i.e. grab all form values)
+1. Add support for authenticated requests
+1. Add better error handling
+1. Add a node server via gulp, so you can use that to serve the demo, with a simple `gulp serve`
