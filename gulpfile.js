@@ -4,10 +4,18 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
 var rimraf = require('rimraf');
+var server = require('gulp-server-livereload');
+var fs = require('fs');
 
 var config = {
   src: './src',
   dist: './dist',
+  demo: './demo',
+  filename: 'jquery.data-remote.js'
+}
+
+function copy(from, to) {
+  fs.createReadStream(from).pipe(fs.createWriteStream(to));
 }
 
 /**
@@ -50,6 +58,16 @@ gulp.task('uglify', ['clean', 'babel'], function () {
     .pipe(gulp.dest(config.dist));
 });
 
+gulp.task('demo', function() {
+  copy(config.dist + '/' + config.filename, config.demo + '/' + config.filename);
+
+  gulp.src(config.demo)
+    .pipe(server({
+      port: 8080,
+      open: true
+    }));
+});
+gulp.task('serve', ['demo']);
 
 // Main tasks
 gulp.task('build', ['babel', 'uglify']);

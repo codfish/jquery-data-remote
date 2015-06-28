@@ -37,14 +37,14 @@
   </style>
 </head>
 <body>
-  <h1>jQuery data-remote Demo</h1>
+  <h1>jQuery Data Remote Demo</h1>
 
-  <iframe width="100%" height="300" src="//jsfiddle.net/codfish/hxgw9pg7/4/embedded/html,js/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+  <iframe width="100%" height="300" src="//jsfiddle.net/codfish/hxgw9pg7/6/embedded/html,js/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
   <section class="example">
-    <h2>Gists by codonnell822</h2>
+    <h2>Gists by codfish</h2>
 
-    <div data-remote="true" data-url="https://api.github.com/users/codonnell822/gists">
+    <div data-remote="true" data-url="https://api.github.com/users/codfish/gists">
       <script type="text/x-handlebars-template">
         <ul>
           {{#each this}}
@@ -58,9 +58,9 @@
     </div>
   </section>
 
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.js"></script>
-  <script type="text/javascript" src="../dist/jquery.data-remote.min.js"></script>
+  <script type="text/javascript" src="jquery.data-remote.js"></script>
   <script>
     $('[data-remote="true"]').dataRemote();
   </script>

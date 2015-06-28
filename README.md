@@ -119,13 +119,8 @@ Almost all options can be set via html5 data attributes, or passed into the plug
 To view the demo, run the following:
 
 ```sh
-$ git clone git@github.com:codonnell822/jquery-data-remote.git
-$ cd jquery-data-remote
-# port 8080 might not work for you, change it to whatever you like
-$ php -S localhost:8080
+$ gulp demo
 ```
-
-Now to view the demo, go to [http://localhost:8080/demo](http://localhost:8080/demo)
 
 
 ## In Development
@@ -134,4 +129,4 @@ Now to view the demo, go to [http://localhost:8080/demo](http://localhost:8080/d
 1. Add better support for POST requests (they're very possible, but should we make assumptions about the data to send by default? i.e. grab all form values)
 1. Add support for authenticated requests
 1. Add better error handling
-1. Add a node server via gulp, so you can use that to serve the demo, with a simple `gulp serve`
+1. ~~Add a node server via gulp, so you can use that to serve the demo, with a simple `gulp serve`~~
