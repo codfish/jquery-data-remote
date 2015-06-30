@@ -8,7 +8,7 @@ jQuery Data Remote is a plugin that simplifies the common task of making api/rem
 * [npm](http://npmjs.org/package/jquery-data-remote): `npm install --save jquery-data-remote`
 * [Bower](http://bower.io/): `bower install --save jquery-data-remote`
 * [cdnjs](https://cdnjs.com/libraries/jquery-data-remote)
-* [Download](https://github.com/codonnell822/jquery-data-remote/archive/v0.6.2.zip).
+* [Download](https://github.com/codfish/jquery-data-remote/releases/download/v0.6.2/jquery-data-remote.zip).
 
 
 ## Options
