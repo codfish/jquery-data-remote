@@ -5,17 +5,13 @@ var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
 var rimraf = require('rimraf');
 var server = require('gulp-server-livereload');
-var fs = require('fs');
+require('shelljs/global');
 
 var config = {
   src: './src',
   dist: './dist',
   demo: './demo',
   filename: 'jquery.data-remote.js'
-}
-
-function copy(from, to) {
-  fs.createReadStream(from).pipe(fs.createWriteStream(to));
 }
 
 /**
@@ -47,7 +43,7 @@ gulp.task('babel', ['clean'], function () {
  *
  * @see https://www.npmjs.com/package/gulp-uglify#options
  */
-gulp.task('uglify', ['clean', 'babel'], function () {
+gulp.task('uglify', ['babel'], function () {
   return gulp.src(config.dist + '/**/*.js')
     .pipe(sourcemaps.init())
     .pipe(uglify())
@@ -58,8 +54,8 @@ gulp.task('uglify', ['clean', 'babel'], function () {
     .pipe(gulp.dest(config.dist));
 });
 
-gulp.task('demo', function() {
-  copy(config.dist + '/' + config.filename, config.demo + '/' + config.filename);
+gulp.task('demo', ['babel'], function() {
+  cp(config.dist + '/' + config.filename, config.demo + '/' + config.filename);
 
   gulp.src(config.demo)
     .pipe(server({
@@ -70,5 +66,5 @@ gulp.task('demo', function() {
 gulp.task('serve', ['demo']);
 
 // Main tasks
-gulp.task('build', ['babel', 'uglify']);
+gulp.task('build', ['uglify']);
 gulp.task('default', ['build']);
