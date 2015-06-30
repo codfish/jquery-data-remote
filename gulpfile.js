@@ -5,11 +5,13 @@ var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
 var rimraf = require('rimraf');
 var server = require('gulp-server-livereload');
+var zip = require('gulp-zip');
 require('shelljs/global');
 
 var config = {
   src: './src',
   dist: './dist',
+  build: './build',
   demo: './demo',
   filename: 'jquery.data-remote.js'
 }
@@ -65,6 +67,22 @@ gulp.task('demo', ['babel'], function() {
 });
 gulp.task('serve', ['demo']);
 
-// Main tasks
-gulp.task('build', ['uglify']);
+/**
+ * Build Release
+ *
+ * @see https://www.npmjs.com/package/gulp-zip
+ */
+gulp.task('release', function () {
+  gulp.src([
+      '!node_modules',
+      '!node_modules/**/*',
+      '!build',
+      '!build/**/*',
+      '**/*',
+    ])
+    .pipe(zip(config.filename.replace('.js', '.zip')))
+    .pipe(gulp.dest(config.build));
+});
+
+gulp.task('build', ['release']);
 gulp.task('default', ['build']);
