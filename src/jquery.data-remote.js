@@ -34,6 +34,7 @@
     // Extend our default options with those provided when instantiating
     var options = $.extend({}, defaults, opts);
 
+    var debouncableEvents = ['keyup', 'keydown', 'keypress', 'scroll', 'resize'];
     /**
      * Default success callback for ajax requests.
      *
@@ -99,6 +100,10 @@
     /**
      * Private helper method for debounce
      *
+     * @param [function] func      function to debounce
+     * @param [integer]  wait      amount of time to wait between events
+     * @param [boolean]  immediate cancels the debounce if True
+     * @return [function] function function with debounce wrapper
      */
     function debounce(func, wait, immediate) {
       var timeout;
