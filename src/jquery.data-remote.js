@@ -35,6 +35,7 @@
     // Extend our default options with those provided when instantiating
     var options = $.extend({}, defaults, opts);
 
+    var debouncableEvents = ['keyup', 'keydown', 'keypress', 'scroll', 'resize'];
     /**
      * Default success callback for ajax requests.
      *
@@ -95,6 +96,29 @@
       if (options.debug) {
         $.fn.dataRemote.debug($target, response, error);
       }
+    }
+
+    /**
+     * Private helper method for debounce
+     *
+     * @param  [function] func      function to debounce
+     * @param  [integer]  wait      amount of time to wait between events
+     * @param  [boolean]  immediate cancels the debounce if True
+     * @return [function] function  function with debounce wrapper
+     */
+    function debounce(func, wait, immediate) {
+      var timeout;
+      return function() {
+        var context = this, args = arguments;
+        var later = function() {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
     }
 
     /**
@@ -163,24 +187,8 @@
       // if no target selector is given, default to actual element
       var $target = _options.target ? $(_options.target) : $element;
 
-      // if event type is 'load', execute the request immediately otherwise,
-      // execute ajax request on specified type (click, submit, mouseover, etc.)
-      if (_options.eventType === 'load') {
-        _options.before.call($element, $target);
-
-        // execute ajax request immediately
-        fetch(_options.url, {
-          element: $element,
-          target: $target,
-          options: _options,
-        });
-      } else {
-        // use proper jQuery method based on oneAndDone option
-        var method = _options.oneAndDone ? 'one' : 'on';
-
-        // bind to specific event type
-        $element[method](_options.eventType, function(evt) {
-          evt.preventDefault();
+      var callback = function callback(evt) {
+        evt.preventDefault();
 
           // if you're watching on keyup or change events, let's assume you want to
           // send the value of the element as a query parameter.
@@ -198,7 +206,28 @@
             target: $target,
             options: _options,
           });
+        };
+
+      // if event type is 'load', execute the request immediately otherwise,
+      // execute ajax request on specified type (click, submit, mouseover, etc.)
+      if (_options.eventType === 'load') {
+        _options.before.call($element, $target);
+
+        // execute ajax request immediately
+        fetch(_options.url, {
+          element: $element,
+          target: $target,
+          options: _options,
         });
+      } else {
+        // use proper jQuery method based on oneAndDone option
+        var method = _options.oneAndDone ? 'one' : 'on';
+
+        if (debouncableEvents.indexOf(_options.eventType) !== -1) {
+          callback = debounce(callback, 500);
+        }
+
+        $element[method](_options.eventType, callback);
       } // end if else (_options.eventType)
     }); // end this.each
   }; // end $.fn.dataRemote
