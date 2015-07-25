@@ -13,30 +13,127 @@ jQuery Data Remote is a plugin that simplifies the common task of making api/rem
 
 ## Options
 
-Option | Type | Default | Description
------- | ---- | ------- | -----------
-data | object | {} | Request data. If this is passed as a html5 attribute, it needs to be a valid JSON string (e.g. `<div data-data='{"count": 20}'></div>`).
-dataType | string | 'json' | The type of response data you're expecting. Can be any dataType value supported by [jQuery.ajax](http://api.jquery.com/jquery.ajax/).
-debug | boolean | false | Turn debugging on/off.
-eventType | string | 'load' | The event type to fire data request on. Can be any event type that is supported by jQuery, including custom events.
-handlebars | boolean | false | Whether to use handlebars templating engine
-loaderImg | string | '' | Image src to an optional loader image.
-method | string | 'GET' | The HTTP method to use for the request (e.g. "POST", "GET", "PUT") Can be any request type supported by jQuery.
-oneAndDone | boolean | true | Whether to remove the event binding after the initial request.
-placement | string | 'html' | Where to inject response relative to target (uses jQuery DOM insertion methods. Can be 'html', 'append', 'prepend', 'before' or 'after').
-target | string | $(element) | Selector of the element where you want your response injected.
-template | string | '' | Selector of the handlebars template. Default it will look inside target element for the template.
-type | string | 'GET' | Alias for method.
-url | string | null | **REQUIRED** API Request URL. Can be absolute or relative. Cross browser requests obviously adhere to CORS. For cross browser requests, you must either set the `dataType` option to `jsonp` or the API request must be to a public api/endpoint.
+#### url {String} (default: `null`)
+
+**REQUIRED** API Request URL. Can be absolute or relative. Cross browser requests obviously adhere to CORS. For cross browser requests, you must either set the `dataType` option to `jsonp` or the API request must be to a public api/endpoint.
+
+```html
+<div data-remote="true" data-url="https://api.github.com/users/codfish/gists"></div>
+<script>
+$('[data-remote=""]').dataRemote();
+</script>
+```
+
+```html
+<div class="news-list"></div>
+<script>
+$(".news-list").dataRemote({
+  url: ''
+  template: '#news-item-template',
+});
+</script>
+```
+
+#### data {Object} (default: `{}`)
+
+Request data. If this is passed as a html5 attribute, it needs to be a valid JSON string.
+
+```html
+<div class="news-list"></div>
+<script>
+$(".news-list").dataRemote({
+  data: {
+    page: 1,
+    count: 20,
+    type: 'videos'
+  }
+});
+</script>
+```
+
+*OR*
+
+```html
+<div class="news-list" data-data='{"page": 2, "count": 20, "type": "videos"}'></div>
+<script>
+$(".news-list").dataRemote();
+</script>
+```
+
+#### dataType {String} (default: `'json'`)
+
+The type of response data you're expecting. Can be any dataType value supported by [jQuery.ajax](http://api.jquery.com/jquery.ajax/).
+
+#### debug {Boolean} (default: `false`)
+
+Turn debugging on/off. Will output errors/notices to the console.
+
+#### eventType {String} (default: `'load'`)
+
+The event type to fire data request on. Can be any event type that is supported by jQuery, including custom events.
+
+#### handlebars {Boolean} (default: `false`)
+
+Whether to use handlebars templating engine.
+
+#### loaderImg {String} (default: `null`)
+
+Source of an optional loader image. When you want a loader image to appear in the target element, while the ajax request is being made. You are responsible for styling how you want, however.
+
+```html
+<script>
+$(".news-list").dataRemote({
+  loaderImg: '/images/loader.gif'
+});
+</script>
+```
+
+#### handlebars {Boolean} (default: `false`)
+
+Whether to use handlebars templating engine. If you put a handlebars template within the target element, Handlebars will be used, regardless of this options' value.
+
+#### method {String} (default: `GET`)
+
+The HTTP method to use for the request (e.g. "POST", "GET", "PUT") Can be any request type supported by jQuery.
+
+#### oneAndDone {Boolean} (default: `true`)
+
+Whether to remove the event binding after the initial request.
+
+#### placement {String} (default: `html`)
+
+Where to inject response relative to target (uses jQuery DOM insertion methods. Can be 'html', 'append', 'prepend', 'before' or 'after').
+
+#### target {String} (default: `$(element).selector`)
+
+Selector of the element where you want your response injected. By default it's assumed that the target is the element that data remote has been initialized on.
+
+#### template {String} (default: `''`)
+
+Selector of the handlebars template. By default it will look inside target element for the template.
+
+#### type {String} (default: `'GET'`)
+
+Alias for method.
+
 
 ## Callbacks
 
-Callback | Type | Default | Description
--------- | ---- | ------- | -----------
-before | function | function($target) {} | Before callback. Fires directly before the request is made. Default is an empty function.
-complete | function | function($target) {} | Complete callback. Fires after request, on success or error. Default is an empty function.
-error | function | errorCallback($target, options, response, error) | Error callback. Fires if the ajax request fails. Takes 4 arguments. Default error callback (`errorCallback()`) handles error reporting is `debug` is true.
-success | function | successCallback($target, options, response) | Success callback. Fires on the success of the ajax request. Takes 3 arguments. The default success callback (`successCallback()`) handles templating the response.
+#### before {Function} (default: `function($target) {}`)
+
+Before callback. Fires directly before the request is made. Default is an empty function.
+
+#### complete {Function} (default: `function($target) {}`)
+
+Complete callback. Fires after request, on success or error. Default is an empty function.
+
+#### error {Function} (default: `errorCallback($target, options, response, error)`)
+
+Error callback. Fires if the ajax request fails. Takes 4 arguments. Default error callback (`errorCallback()`) handles error reporting is `debug` is true.
+
+#### success {Function} (default: `successCallback($target, options, response)`)
+
+Success callback. Fires on the success of the ajax request. Takes 3 arguments. The default success callback (`successCallback()`) handles templating the response.
 
 
 ## Usage
@@ -44,7 +141,7 @@ success | function | successCallback($target, options, response) | Success callb
 1) Here's a great example of how this plugin can help minimize the amount of work you need to do in order to make an ajax request and handle the results. Here's an api request to githubs' gists api, using handlebars for templating (optional). This also leverages all of the default options (event type of 'load', data type of json, request type of GET, etc. See [Options](#options) for more details).
 
   ```html
-  <div data-remote="true" data-url="https://api.github.com/users/codonnell822/gists">
+  <div data-remote="true" data-url="https://api.github.com/users/codfish/gists">
     <script type="text/x-handlebars-template">
       <ul>
         {{#each this}}
