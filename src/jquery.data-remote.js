@@ -43,9 +43,9 @@
      * and handling the ajax requests' response (levering handlebars if option
      * is set or handlebars template is found inside the target element).
      *
-     * @param  {jQuery} $target  jquery object containing the target element for the ajax response
-     * @param  {object} options  plugin options set during instantiation
-     * @param  {object} response data response from the ajax request
+     * @param {jQuery} $target  jquery object containing the target element for the ajax response
+     * @param {object} options  plugin options set during instantiation
+     * @param {object} response data response from the ajax request
      */
     function successCallback($target, options, response) {
       var source;
@@ -85,10 +85,10 @@
      *
      * Hides the loader image, triggers debugging if it's turned on.
      *
-     * @param  {jQuery} $target   jquery object containing the target element for the ajax response
-     * @param  {object} options   plugin options set during instantiation
-     * @param  {object} response  data response from the ajax request
-     * @param  {string} error     textual portion of the HTTP status, i.e. "Not Found" or "Internal Server Error."
+     * @param {jQuery} $target   jquery object containing the target element for the ajax response
+     * @param {object} options   plugin options set during instantiation
+     * @param {object} response  data response from the ajax request
+     * @param {string} error     textual portion of the HTTP status, i.e. "Not Found" or "Internal Server Error."
      */
     function errorCallback($target, options, response, error) {
       $target.find('.loader-image').hide();
