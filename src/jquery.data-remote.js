@@ -8,10 +8,10 @@
  * engines (handlebars). Inpired by ruby on rails' unobtrusive scripting adapter
  * for jQuery (https://github.com/rails/jquery-ujs).
  */
-;(function($, window, undefined) {
+;(function ($, window, undefined) {
   "use strict";
 
-  $.fn.dataRemote = function(opts = {}) {
+  $.fn.dataRemote = function (opts = {}) {
     // Default Settings
     var defaults = {
       url: null, // request url
@@ -28,8 +28,8 @@
       oneAndDone: true, // whether to remove the event binding after the first time running
       success: successCallback, // gets passed 3 parameters ($target, options, response)
       error: errorCallback, // gets passed 4 parameters ($target, options, response, error)
-      complete: function($target) {}, // callback fires after the request is made (on success OR error)
-      before: function($target) {} // callback fires directly before the request is made
+      complete: function () {}, // callback fires after the request is made (on success OR error)
+      before: function () {} // callback fires directly before the request is made
     };
 
     // Extend our default options with those provided when instantiating
@@ -108,9 +108,9 @@
      */
     function debounce(func, wait, immediate) {
       var timeout;
-      return function() {
+      return function () {
         var context = this, args = arguments;
-        var later = function() {
+        var later = function () {
           timeout = null;
           if (!immediate) func.apply(context, args);
         };
@@ -155,18 +155,18 @@
         type: options.type,
         dataType: options.dataType,
         cache: true,
-        success: function(response) {
+        success: function (response) {
           options.success.call($element, $target, options, response);
           options.complete.call($element, $target);
         },
-        error: function(response, status, error) {
+        error: function (response, status, error) {
           options.error.call($element, $target, options, response, error);
           options.complete.call($element, $target);
         }
       });
     }
 
-    return this.each(function(idx, element) {
+    return this.each(function (idx, element) {
       var $element = $(element);
 
       // Create a local copy of the options for each element. This will allow each
@@ -235,7 +235,7 @@
   /**
    * Helper function for debugging
    */
-  $.fn.dataRemote.debug = function(element, output, error) {
+  $.fn.dataRemote.debug = function (element, output, error) {
     if (window.console && window.console.log) {
       window.console.log('Element: ');
       window.console.log(element);

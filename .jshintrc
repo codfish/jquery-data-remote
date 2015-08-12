@@ -1,0 +1,8 @@
+{
+  "esnext": true,
+  "strict": true,
+  "eqeqeq": true,
+  "unused": true,
+  "maxdepth": 2,
+  "jquery": true
+}
