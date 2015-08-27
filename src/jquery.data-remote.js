@@ -1,6 +1,6 @@
 /**
  * jQuery Data Remote Plugin
- * http://github.com/codonnell822/jquery-dataremote
+ * http://github.com/codfish/jquery-dataremote
  * Copyright 2014-2015, Chris O'Donnell
  *
  * jQuery plugin that simplifies the common task of making api/remote requests

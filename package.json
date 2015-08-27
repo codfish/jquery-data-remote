@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:codonnell822/jquery-data-remote.git"
+    "url": "git@github.com:codfish/jquery-data-remote.git"
   },
   "keywords": [
     "jquery",
@@ -21,9 +21,9 @@
   "author": "Chris O'Donnell",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/codonnell822/jquery-data-remote/issues"
+    "url": "https://github.com/codfish/jquery-data-remote/issues"
   },
-  "homepage": "https://github.com/codonnell822/jquery-data-remote",
+  "homepage": "https://github.com/codfish/jquery-data-remote",
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-babel": "^5.1.0",
