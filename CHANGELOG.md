@@ -1,5 +1,8 @@
-# Current
+# v0.7.0
 
+* [(7596022)](https://github.com/codfish/jquery-data-remote/commit/75960225019bf696af1f04505256ff21a65c6e54) - allow users to provide a list of event types in a 'debounceEvents' option <codfish>
+* [(754f2f0)](https://github.com/codfish/jquery-data-remote/commit/754f2f0e304f4172192e8563017294def976d4f5) - added debounce helper method to debounce main plugin ajax requests for certain event types <mekhami>
+* [(6882fa0)](https://github.com/codfish/jquery-data-remote/commit/eeeb8c246808332206c5c2a7169445ceca16f535) - add jshintrc and clean up jshint warnings <codfish>
 * [(eeeb8c2)](https://github.com/codfish/jquery-data-remote/commit/eeeb8c246808332206c5c2a7169445ceca16f535) - add gulp task to create zip archive for github release <codfish>
 * [(2784a2f)](https://github.com/codfish/jquery-data-remote/commit/2784a2f02ae9d2b447e61497dc7057167219d8db) - clean up gulp dependencies, add shelljs <codfish>
 
