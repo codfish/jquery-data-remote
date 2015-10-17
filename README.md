@@ -116,6 +116,18 @@ Selector of the handlebars template. By default it will look inside target eleme
 
 Alias for method.
 
+#### debounceEvents {Array} (default: `['keyup', 'keydown', 'keypress', 'scroll', 'resize']`)
+
+A list of event types that will cause the execution of the main callback function to be [debounced](http://davidwalsh.name/javascript-debounce-function). The default events provided are one's that can typically get fired in rapid succession and cause jank. You cannot provide this option as a data attribute. Custom events can be provided.
+
+```html
+<script>
+$(".news-list").dataRemote({
+  debounceEvents: ['scroll', 'gesturechange', 'orientationchange', 'customresize']
+});
+</script>
+```
+
 
 ## Callbacks
 

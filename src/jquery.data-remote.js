@@ -11,7 +11,7 @@
 ;(function ($, window, undefined) {
   "use strict";
 
-  $.fn.dataRemote = function (opts = {}) {
+  $.fn.dataRemote = function(options = {}) {
     // Default Settings
     var defaults = {
       url: null, // request url
@@ -26,6 +26,7 @@
       placement: 'html', // where to inject response relative to target (jquery DOM insertion methods <html|append|prepend|before|after>)
       loaderImg: null, // target selector for data response
       oneAndDone: true, // whether to remove the event binding after the first time running
+      debounceEvents: ['keyup', 'keydown', 'keypress', 'scroll', 'resize'],
       success: successCallback, // gets passed 3 parameters ($target, options, response)
       error: errorCallback, // gets passed 4 parameters ($target, options, response, error)
       complete: function () {}, // callback fires after the request is made (on success OR error)
@@ -33,9 +34,8 @@
     };
 
     // Extend our default options with those provided when instantiating
-    var options = $.extend({}, defaults, opts);
+    options = $.extend({}, defaults, options);
 
-    var debouncableEvents = ['keyup', 'keydown', 'keypress', 'scroll', 'resize'];
     /**
      * Default success callback for ajax requests.
      *
@@ -187,43 +187,42 @@
       // if no target selector is given, default to actual element
       var $target = _options.target ? $(_options.target) : $element;
 
+      // this is the callback function that will fire on whatever event
+      // is provided for this element. It's responsible for actually triggering
+      // the ajax request && the before callback
       var callback = function callback(evt) {
-        evt.preventDefault();
+        evt && evt.preventDefault();
 
-          // if you're watching on keyup or change events, let's assume you want to
-          // send the value of the element as a query parameter.
-          // Think autosuggest search boxes.
-          // <input data-event-type="keyup" name="q" data-target="#search-results">
-          if (['keyup', 'change'].indexOf(evt.type) !== -1) {
-            _options.data[this.name] = this.value;
-          }
+        // if you're watching on keyup or change events, let's assume you want to
+        // send the value of the element as a query parameter.
+        // Think autosuggest search boxes.
+        // <input data-event-type="keyup" name="q" data-target="#search-results">
+        if (['keyup', 'change'].indexOf(_options.eventType) !== -1) {
+          _options.data[this.name] = this.value;
+        }
 
-          // execute before request callback
-          _options.before.call($element, $target);
-
-          fetch(_options.url, {
-            element: $element,
-            target: $target,
-            options: _options,
-          });
-        };
-
-      // if event type is 'load', execute the request immediately otherwise,
-      // execute ajax request on specified type (click, submit, mouseover, etc.)
-      if (_options.eventType === 'load') {
+        // execute before request callback
         _options.before.call($element, $target);
 
-        // execute ajax request immediately
+        // make the ajax request
         fetch(_options.url, {
           element: $element,
           target: $target,
           options: _options,
         });
+      };
+
+      // if event type is 'load', execute the request immediately otherwise,
+      // execute ajax request on specified type (click, submit, mouseover, etc.)
+      if (_options.eventType === 'load') {
+        callback();
       } else {
         // use proper jQuery method based on oneAndDone option
         var method = _options.oneAndDone ? 'one' : 'on';
 
-        if (debouncableEvents.indexOf(_options.eventType) !== -1) {
+        // if the event type is a "debounce event", make sure to
+        // debounce the callback function
+        if (_options.debounceEvents.indexOf(_options.eventType) !== -1) {
           callback = debounce(callback, 500);
         }
 
