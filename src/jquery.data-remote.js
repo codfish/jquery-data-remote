@@ -140,10 +140,10 @@
 
       // display loader image while retrieving content
       if (options.loaderImg) {
-        $target.prepend(String() +
-          '<div class="loader-image" style="clear: both;">' +
-            '<img src="' + options.loaderImg + '" alt="Loading...">' +
-          '</div>'
+        $target.prepend(`
+          <div class="loader-image" style="clear: both;">
+            <img src="${options.loaderImg}" alt="Loading...">
+          </div>`
         );
       }
 
