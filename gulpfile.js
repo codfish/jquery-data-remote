@@ -99,5 +99,5 @@ gulp.task('release', function () {
 });
 
 gulp.task('serve', ['demo']);
-gulp.task('build', ['release']);
-gulp.task('default', ['uglify']);
+gulp.task('build', ['uglify']);
+gulp.task('default', ['build']);
