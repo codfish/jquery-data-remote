@@ -34,6 +34,10 @@
     hr {
       margin: 30px 0;
     }
+
+    .loader-image {
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -62,7 +66,9 @@
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.js"></script>
   <script type="text/javascript" src="jquery.data-remote.js"></script>
   <script>
-    $('[data-remote="true"]').dataRemote();
+    $('[data-remote="true"]').dataRemote({
+      loaderImg: 'loader.gif'
+    });
   </script>
 </body>
 </html>
