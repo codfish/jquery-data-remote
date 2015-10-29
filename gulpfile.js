@@ -100,4 +100,4 @@ gulp.task('release', function () {
 
 gulp.task('serve', ['demo']);
 gulp.task('build', ['release']);
-gulp.task('default', ['build']);
+gulp.task('default', ['uglify']);
