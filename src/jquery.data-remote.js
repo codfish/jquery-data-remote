@@ -29,8 +29,8 @@
       debounceEvents: ['keyup', 'keydown', 'keypress', 'scroll', 'resize'],
       success: successCallback, // gets passed 3 parameters ($target, options, response)
       error: errorCallback, // gets passed 4 parameters ($target, options, response, error)
-      complete: function () {}, // callback fires after the request is made (on success OR error)
-      before: function () {} // callback fires directly before the request is made
+      complete: () => {}, // callback fires after the request is made (on success OR error)
+      before: () => {} // callback fires directly before the request is made
     };
 
     // Extend our default options with those provided when instantiating
@@ -110,7 +110,7 @@
       var timeout;
       return function () {
         var context = this, args = arguments;
-        var later = function () {
+        var later = function later() {
           timeout = null;
           if (!immediate) func.apply(context, args);
         };
@@ -155,11 +155,11 @@
         type: options.type,
         dataType: options.dataType,
         cache: true,
-        success: function (response) {
+        success: (response) => {
           options.success.call($element, $target, options, response);
           options.complete.call($element, $target);
         },
-        error: function (response, status, error) {
+        error: (response, status, error) => {
           options.error.call($element, $target, options, response, error);
           options.complete.call($element, $target);
         }
