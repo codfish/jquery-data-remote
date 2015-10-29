@@ -6,6 +6,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var rimraf = require('rimraf');
 var server = require('gulp-server-livereload');
 var zip = require('gulp-zip');
+var fs = require('fs');
 require('shelljs/global');
 
 var config = {
@@ -22,7 +23,7 @@ var config = {
  * @see https://www.npmjs.com/package/rimraf
  */
 gulp.task('clean', function () {
-  rimraf(config.dist, function(err) {
+  rimraf(config.dist, function (err) {
     if (err) throw err;
   });
 });
@@ -57,15 +58,28 @@ gulp.task('uglify', ['babel'], function () {
 });
 
 gulp.task('demo', ['babel'], function() {
-  cp(config.dist + '/' + config.filename, config.demo + '/' + config.filename);
+  var distFile = config.dist  + '/' + config.filename;
+  var demoFile = config.demo  + '/' + config.filename;
 
-  gulp.src(config.demo)
-    .pipe(server({
-      port: 8080,
-      open: true
-    }));
+  // copy over latest compiled version of the plugin
+  // to the demo directory
+  fs.stat(demoFile, function (err, stats) {
+    // delete existing file from demo dir if it exists
+    if (!err) {
+      fs.unlinkSync(demoFile);
+    }
+
+    // copy over last dist copy
+    cp(distFile, demoFile);
+
+    // start the server with demo being the webroot
+    gulp.src(config.demo)
+      .pipe(server({
+        port: 8080,
+        open: true
+      }));
+  });
 });
-gulp.task('serve', ['demo']);
 
 /**
  * Build Release
@@ -84,5 +98,6 @@ gulp.task('release', function () {
     .pipe(gulp.dest(config.build));
 });
 
+gulp.task('serve', ['demo']);
 gulp.task('build', ['release']);
 gulp.task('default', ['build']);
