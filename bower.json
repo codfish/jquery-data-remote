@@ -1,11 +1,11 @@
 {
   "name": "jquery-data-remote",
-  "version": "0.7.0",
+  "version": "0.8.2",
   "homepage": "https://github.com/codfish/jquery-data-remote",
   "authors": [
     "Chris O'Donnell"
   ],
-  "description": "jQuery Data Remote is a plugin that simplifies the common task of making api/remote requests and injecting the response to the page. Optionally leverages Handlebars.js for templating.",
+  "description": "jQuery data-remote is a plugin that simplifies the common task of making api/remote requests and injecting the response to the page. Optionally leverages Handlebars.js for templating.",
   "main": "src/jquery.data-remote.js",
   "keywords": [
     "jquery",
