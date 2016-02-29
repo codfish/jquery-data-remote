@@ -1,3 +1,7 @@
+# v0.8.4
+
+* [9d380e5](https://github.com/codfish/jquery-data-remote/commit/9d380e5e176c11fbedc0a7ff76fbfafc10690e97) - Fix changelog commit links <Chris O'Donnell>
+
 # v0.8.3
 
 * [3ceddb8](https://github.com/codfish/jquery-data-remote/commit/3ceddb804eb1299c5176ea1d45076f482ebeb0e0) - Specify uglify as a dependency for the gulp demo <Chris O'Donnell>
