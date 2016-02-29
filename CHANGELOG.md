@@ -1,3 +1,11 @@
+# v0.8.3
+
+* [3ceddb8](https://github.com/codfish/jquery-data-remote/3ceddb804eb1299c5176ea1d45076f482ebeb0e0) - Specify uglify as a dependency for the gulp demo <Chris O'Donnell>
+* [1ba0d86](https://github.com/codfish/jquery-data-remote/1ba0d86a50bde0fe1cc53f2afae2390ce23c86f8) - Remove dist from gitignore to start tracking built files <Chris O'Donnell>
+* [2258ec1](https://github.com/codfish/jquery-data-remote/2258ec1d7460ada5ee47494a625ffb14ca3882ca) - Refactor main callback event handling <Chris O'Donnell>
+* [311937e](https://github.com/codfish/jquery-data-remote/311937ee34ae0e92bdf59918dcf065221e1c4529) - Fix use strict in dist version <Chris O'Donnell>
+* [13ec1bc](https://github.com/codfish/jquery-data-remote/13ec1bc4c2e748a4105e0a78373eecf19acf820b) - Cleanup readme <Chris O'Donnell>
+
 # v0.8.2
 
 * [73e28b6](https://github.com/codfish/jquery-data-remote/73e28b63c4fd6a3f383cee3ab6c8feb79feca96a) - update travis npm token <Chris O'Donnell>
