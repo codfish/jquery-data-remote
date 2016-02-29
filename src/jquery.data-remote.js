@@ -190,8 +190,10 @@
       // this is the callback function that will fire on whatever event
       // is provided for this element. It's responsible for actually triggering
       // the ajax request && the before callback
-      var callback = function callback(evt) {
-        evt && evt.preventDefault();
+      var callback = function callback(evt = null) {
+        if (evt) {
+          evt.preventDefault();
+        }
 
         // if you're watching on keyup or change events, let's assume you want to
         // send the value of the element as a query parameter.
