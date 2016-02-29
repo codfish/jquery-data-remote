@@ -18,7 +18,7 @@ var config = {
 };
 
 /**
- * Clean start. Remove all build files.
+ * Clean start. Remove all dist files.
  *
  * @see https://www.npmjs.com/package/rimraf
  */
