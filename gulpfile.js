@@ -59,7 +59,7 @@ gulp.task('uglify', ['babel'], function () {
     .pipe(gulp.dest(config.dist));
 });
 
-gulp.task('demo', ['babel'], function() {
+gulp.task('demo', ['uglify'], function() {
   var distFile = config.dist  + '/' + config.filename;
   var demoFile = config.demo  + '/' + config.filename;
 
