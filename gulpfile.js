@@ -15,7 +15,7 @@ var config = {
   build: './build',
   demo: './demo',
   filename: 'jquery.data-remote.js'
-}
+};
 
 /**
  * Clean start. Remove all build files.
@@ -36,7 +36,9 @@ gulp.task('clean', function () {
 gulp.task('babel', ['clean'], function () {
   return gulp.src(config.src + '/**/*.js')
     .pipe(sourcemaps.init())
-    .pipe(babel())
+    .pipe(babel({
+      blacklist: ["useStrict"],
+    }))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(config.dist));
 });

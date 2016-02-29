@@ -9,7 +9,7 @@
  * for jQuery (https://github.com/rails/jquery-ujs).
  */
 ;(function ($, window, undefined) {
-  "use strict";
+  'use strict';
 
   $.fn.dataRemote = function(options = {}) {
     // Default Settings
