@@ -16,10 +16,10 @@
     <div class="wrapper">
       <header>
         <h1>Jquery Data Remote</h1>
+
         <p>jQuery plugin that simplifies the common task of making api/remote requests and injecting the response to the page. Optionally leverages Handlebars.js for templating. Inpired by ruby on rails&#39; unobtrusive scripting adapter for jQuery (https://github.com/rails/jquery-ujs).</p>
 
         <p class="view"><a href="https://github.com/codfish/jquery-data-remote">View the Project on GitHub <small>codfish/jquery-data-remote</small></a></p>
-
 
         <ul>
           <li><a href="https://github.com/codfish/jquery-data-remote/zipball/master">Download <strong>ZIP File</strong></a></li>
@@ -27,273 +27,278 @@
           <li><a href="https://github.com/codfish/jquery-data-remote">View On <strong>GitHub</strong></a></li>
         </ul>
       </header>
+
       <section>
-        <p><a href="https://travis-ci.org/codfish/jquery-data-remote"><img src="https://api.travis-ci.org/codfish/jquery-data-remote.svg?branch=master" alt="Travis build status"></a></p>
-
-<h2>
-<a id="install" class="anchor" href="#install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install</h2>
-
-<ul>
-<li>
-<a href="http://npmjs.org/package/jquery-data-remote">npm</a>: <code>npm install --save jquery-data-remote</code>
-</li>
-<li>
-<a href="http://bower.io/">Bower</a>: <code>bower install --save jquery-data-remote</code>
-</li>
-<li><a href="https://cdnjs.com/libraries/jquery-data-remote">cdnjs</a></li>
-<li><a href="https://github.com/codfish/jquery-data-remote/releases">Download the latest release on Github</a></li>
-</ul>
-
-<h2>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
-
-<p>1) Here's a great example of how this plugin can help minimize the amount of work you need to do in order to make an ajax request and handle the results. Here's an api request to githubs' gists api, using handlebars for templating (optional). This also leverages all of the default options (event type of 'load', data type of json, request type of GET, etc. See <a href="#options">Options</a> for more details).</p>
-
-<div class="highlight highlight-text-html-basic"><pre>  &lt;<span class="pl-ent">div</span> <span class="pl-e">data-remote</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> <span class="pl-e">data-url</span>=<span class="pl-s"><span class="pl-pds">"</span>https://api.github.com/users/codfish/gists<span class="pl-pds">"</span></span>&gt;
-    &lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/x-handlebars-template<span class="pl-pds">"</span></span>&gt;
-      &lt;<span class="pl-ent">ul</span>&gt;
-        {{#each this}}
-          &lt;<span class="pl-ent">li</span>&gt;
-            &lt;<span class="pl-ent">h3</span>&gt;&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>{{ html_url }}<span class="pl-pds">"</span></span> <span class="pl-e">target</span>=<span class="pl-s"><span class="pl-pds">"</span>_blank<span class="pl-pds">"</span></span>&gt;{{ html_url }}&lt;/<span class="pl-ent">a</span>&gt;&lt;/<span class="pl-ent">h3</span>&gt;
-            &lt;<span class="pl-ent">p</span>&gt;{{ description }}&lt;/<span class="pl-ent">p</span>&gt;
-          &lt;/<span class="pl-ent">li</span>&gt;
-        {{/each}}
-      &lt;/<span class="pl-ent">ul</span>&gt;
-    &lt;/<span class="pl-ent">script</span>&gt;
-  &lt;/<span class="pl-ent">div</span>&gt;</pre></div>
-
-<p>Almost all options can be set via html5 data attributes, or passed into the plugin initialization, or a mixture of both. Note html5 data attributes take precedence, so if you wanted to, you can initialize data remote with options, and then override options on any specific element using data attributes. See the following example:</p>
-
-<p>1) Here's an example with 3 elements getting initialized together, but showing the ability to override options with data attributes.</p>
-
-<ul>
-<li>
-<p>First, here's the plugin initialization. Initialize all of the <code>.get-news</code> elements with data remote options you want.</p>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-en">$</span>(<span class="pl-c1">document</span>).<span class="pl-en">ready</span>(<span class="pl-k">function</span>() {
-  <span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>.get-news<span class="pl-pds">'</span></span>).<span class="pl-en">dataRemote</span>({
-    url<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>http://api.example.com/news<span class="pl-pds">'</span></span>,
-  });
-});</pre></div>
-</li>
-<li>
-<p>Here's the first element, a wrapper element with no data attributes. Leverages the default options of the plugin, as well as the options you specify below in the plugin call.</p>
-
-<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">ul</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>news-list-wrapper<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>get-news<span class="pl-pds">"</span></span>&gt;
-  &lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/x-handlebars-template<span class="pl-pds">"</span></span>&gt;
-    {{#each news_items}}
-      &lt;<span class="pl-ent">li</span>&gt;
-        &lt;<span class="pl-ent">h3</span>&gt;&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>{{ url }}<span class="pl-pds">"</span></span> <span class="pl-e">target</span>=<span class="pl-s"><span class="pl-pds">"</span>_blank<span class="pl-pds">"</span></span>&gt;{{ url }}&lt;/<span class="pl-ent">a</span>&gt;&lt;/<span class="pl-ent">h3</span>&gt;
-        &lt;<span class="pl-ent">p</span>&gt;{{ dek }}&lt;/<span class="pl-ent">p</span>&gt;
-      &lt;/<span class="pl-ent">li</span>&gt;
-    {{/each}}
-  &lt;/<span class="pl-ent">script</span>&gt;
-&lt;/<span class="pl-ent">ul</span>&gt;</pre></div>
-</li>
-<li>
-<p>Now we add a link to the page to allow the user to load more news. Overrides request url adding page param</p>
-
-<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">a</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>get-news<span class="pl-pds">"</span></span>
-   <span class="pl-e">data-target</span>=<span class="pl-s"><span class="pl-pds">"</span>.news-list-wrapper<span class="pl-pds">"</span></span>
-   <span class="pl-e">data-event-type</span>=<span class="pl-s"><span class="pl-pds">"</span>click<span class="pl-pds">"</span></span>
-   <span class="pl-e">data-placement</span>=<span class="pl-s"><span class="pl-pds">"</span>append<span class="pl-pds">"</span></span>
-   <span class="pl-e">data-url</span>=<span class="pl-s"><span class="pl-pds">"</span>http://api.example.com/news?page=2<span class="pl-pds">"</span></span>
-&gt;
-    Load More News
-&lt;/<span class="pl-ent">a</span>&gt;</pre></div>
-</li>
-<li>
-<p>override request url</p>
-
-<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">a</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>get-news<span class="pl-pds">"</span></span>
-   <span class="pl-e">data-url</span>=<span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>
-   <span class="pl-e">data-target</span>=<span class="pl-s"><span class="pl-pds">"</span>.news-list-wrapper<span class="pl-pds">"</span></span>
-   <span class="pl-e">data-event-type</span>=<span class="pl-s"><span class="pl-pds">"</span>click<span class="pl-pds">"</span></span>
-   <span class="pl-e">data-url</span>=<span class="pl-s"><span class="pl-pds">"</span>http://api.example.com/news?category=funny<span class="pl-pds">"</span></span>
-&gt;
-  Display Funny News Instead
-&lt;/<span class="pl-ent">a</span>&gt;</pre></div>
-</li>
-</ul>
-
-<h2>
-<a id="options" class="anchor" href="#options" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Options</h2>
-
-<h4>
-<a id="url-string-default-null" class="anchor" href="#url-string-default-null" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>url {String} (default: <code>null</code>)</h4>
-
-<p><strong>REQUIRED</strong> API Request URL. Can be absolute or relative. Cross browser requests obviously adhere to CORS. For cross browser requests, you must either set the <code>dataType</code> option to <code>jsonp</code> or the API request must be to a public api/endpoint.</p>
-
-<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">div</span> <span class="pl-e">data-remote</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> <span class="pl-e">data-url</span>=<span class="pl-s"><span class="pl-pds">"</span>https://api.github.com/users/codfish/gists<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
-<span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span>
-<span class="pl-s1"><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>[data-remote="true"]<span class="pl-pds">'</span></span>).<span class="pl-en">dataRemote</span>();</span>
-<span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
-
-<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>news-list<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
-<span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span>
-<span class="pl-s1"><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">"</span>.news-list<span class="pl-pds">"</span></span>).<span class="pl-en">dataRemote</span>({</span>
-<span class="pl-s1">  url<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span></span>
-<span class="pl-s1">  template<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>#news-item-template<span class="pl-pds">'</span></span>,</span>
-<span class="pl-s1">});</span>
-<span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
+        <p>
+          <a href="https://travis-ci.org/codfish/jquery-data-remote">
+            <img src="https://api.travis-ci.org/codfish/jquery-data-remote.svg?branch=master" alt="Travis build status">
+          </a>
+        </p>
+
+        <h2><a id="install" class="anchor" href="#install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install</h2>
+
+        <ul>
+          <li>
+          <a href="http://npmjs.org/package/jquery-data-remote">npm</a>: <code>npm install --save jquery-data-remote</code>
+          </li>
+          <li>
+          <a href="http://bower.io/">Bower</a>: <code>bower install --save jquery-data-remote</code>
+          </li>
+          <li><a href="https://cdnjs.com/libraries/jquery-data-remote">cdnjs</a></li>
+          <li><a href="https://github.com/codfish/jquery-data-remote/releases">Download the latest release on Github</a></li>
+        </ul>
+
+        <h2><a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+        <p>1) Here's a great example of how this plugin can help minimize the amount of work you need to do in order to make an ajax request and handle the results. Here's an api request to githubs' gists api, using handlebars for templating (optional). This also leverages all of the default options (event type of 'load', data type of json, request type of GET, etc. See <a href="#options">Options</a> for more details).</p>
+
+        <div class="highlight highlight-text-html-basic"><pre>  &lt;<span class="pl-ent">div</span> <span class="pl-e">data-remote</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> <span class="pl-e">data-url</span>=<span class="pl-s"><span class="pl-pds">"</span>https://api.github.com/users/codfish/gists<span class="pl-pds">"</span></span>&gt;
+            &lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/x-handlebars-template<span class="pl-pds">"</span></span>&gt;
+              &lt;<span class="pl-ent">ul</span>&gt;
+                {{#each this}}
+                  &lt;<span class="pl-ent">li</span>&gt;
+                    &lt;<span class="pl-ent">h3</span>&gt;&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>{{ html_url }}<span class="pl-pds">"</span></span> <span class="pl-e">target</span>=<span class="pl-s"><span class="pl-pds">"</span>_blank<span class="pl-pds">"</span></span>&gt;{{ html_url }}&lt;/<span class="pl-ent">a</span>&gt;&lt;/<span class="pl-ent">h3</span>&gt;
+                    &lt;<span class="pl-ent">p</span>&gt;{{ description }}&lt;/<span class="pl-ent">p</span>&gt;
+                  &lt;/<span class="pl-ent">li</span>&gt;
+                {{/each}}
+              &lt;/<span class="pl-ent">ul</span>&gt;
+            &lt;/<span class="pl-ent">script</span>&gt;
+          &lt;/<span class="pl-ent">div</span>&gt;</pre></div>
+
+        <p>Almost all options can be set via html5 data attributes, or passed into the plugin initialization, or a mixture of both. Note html5 data attributes take precedence, so if you wanted to, you can initialize data remote with options, and then override options on any specific element using data attributes. See the following example:</p>
+
+        <p>1) Here's an example with 3 elements getting initialized together, but showing the ability to override options with data attributes.</p>
+
+        <ul>
+        <li>
+        <p>First, here's the plugin initialization. Initialize all of the <code>.get-news</code> elements with data remote options you want.</p>
+
+        <div class="highlight highlight-source-js"><pre><span class="pl-en">$</span>(<span class="pl-c1">document</span>).<span class="pl-en">ready</span>(<span class="pl-k">function</span>() {
+          <span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>.get-news<span class="pl-pds">'</span></span>).<span class="pl-en">dataRemote</span>({
+            url<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>http://api.example.com/news<span class="pl-pds">'</span></span>,
+          });
+        });</pre></div>
+        </li>
+        <li>
+        <p>Here's the first element, a wrapper element with no data attributes. Leverages the default options of the plugin, as well as the options you specify below in the plugin call.</p>
+
+        <div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">ul</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>news-list-wrapper<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>get-news<span class="pl-pds">"</span></span>&gt;
+          &lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/x-handlebars-template<span class="pl-pds">"</span></span>&gt;
+            {{#each news_items}}
+              &lt;<span class="pl-ent">li</span>&gt;
+                &lt;<span class="pl-ent">h3</span>&gt;&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>{{ url }}<span class="pl-pds">"</span></span> <span class="pl-e">target</span>=<span class="pl-s"><span class="pl-pds">"</span>_blank<span class="pl-pds">"</span></span>&gt;{{ url }}&lt;/<span class="pl-ent">a</span>&gt;&lt;/<span class="pl-ent">h3</span>&gt;
+                &lt;<span class="pl-ent">p</span>&gt;{{ dek }}&lt;/<span class="pl-ent">p</span>&gt;
+              &lt;/<span class="pl-ent">li</span>&gt;
+            {{/each}}
+          &lt;/<span class="pl-ent">script</span>&gt;
+        &lt;/<span class="pl-ent">ul</span>&gt;</pre></div>
+        </li>
+        <li>
+        <p>Now we add a link to the page to allow the user to load more news. Overrides request url adding page param</p>
+
+        <div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">a</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>get-news<span class="pl-pds">"</span></span>
+           <span class="pl-e">data-target</span>=<span class="pl-s"><span class="pl-pds">"</span>.news-list-wrapper<span class="pl-pds">"</span></span>
+           <span class="pl-e">data-event-type</span>=<span class="pl-s"><span class="pl-pds">"</span>click<span class="pl-pds">"</span></span>
+           <span class="pl-e">data-placement</span>=<span class="pl-s"><span class="pl-pds">"</span>append<span class="pl-pds">"</span></span>
+           <span class="pl-e">data-url</span>=<span class="pl-s"><span class="pl-pds">"</span>http://api.example.com/news?page=2<span class="pl-pds">"</span></span>
+        &gt;
+            Load More News
+        &lt;/<span class="pl-ent">a</span>&gt;</pre></div>
+        </li>
+        <li>
+        <p>override request url</p>
+
+        <div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">a</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>get-news<span class="pl-pds">"</span></span>
+           <span class="pl-e">data-url</span>=<span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>
+           <span class="pl-e">data-target</span>=<span class="pl-s"><span class="pl-pds">"</span>.news-list-wrapper<span class="pl-pds">"</span></span>
+           <span class="pl-e">data-event-type</span>=<span class="pl-s"><span class="pl-pds">"</span>click<span class="pl-pds">"</span></span>
+           <span class="pl-e">data-url</span>=<span class="pl-s"><span class="pl-pds">"</span>http://api.example.com/news?category=funny<span class="pl-pds">"</span></span>
+        &gt;
+          Display Funny News Instead
+        &lt;/<span class="pl-ent">a</span>&gt;</pre></div>
+        </li>
+        </ul>
+
+        <h2>
+        <a id="options" class="anchor" href="#options" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Options</h2>
+
+        <h4>
+        <a id="url-string-default-null" class="anchor" href="#url-string-default-null" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>url {String} (default: <code>null</code>)</h4>
+
+        <p><strong>REQUIRED</strong> API Request URL. Can be absolute or relative. Cross browser requests obviously adhere to CORS. For cross browser requests, you must either set the <code>dataType</code> option to <code>jsonp</code> or the API request must be to a public api/endpoint.</p>
+
+        <div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">div</span> <span class="pl-e">data-remote</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> <span class="pl-e">data-url</span>=<span class="pl-s"><span class="pl-pds">"</span>https://api.github.com/users/codfish/gists<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+        <span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span>
+        <span class="pl-s1"><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>[data-remote="true"]<span class="pl-pds">'</span></span>).<span class="pl-en">dataRemote</span>();</span>
+        <span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
 
-<h4>
-<a id="data-object-default-" class="anchor" href="#data-object-default-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>data {Object} (default: <code>{}</code>)</h4>
+        <div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>news-list<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+        <span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span>
+        <span class="pl-s1"><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">"</span>.news-list<span class="pl-pds">"</span></span>).<span class="pl-en">dataRemote</span>({</span>
+        <span class="pl-s1">  url<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span></span>
+        <span class="pl-s1">  template<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>#news-item-template<span class="pl-pds">'</span></span>,</span>
+        <span class="pl-s1">});</span>
+        <span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
 
-<p>Request data. If this is passed as a html5 attribute, it needs to be a valid JSON string.</p>
+        <h4>
+        <a id="data-object-default-" class="anchor" href="#data-object-default-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>data {Object} (default: <code>{}</code>)</h4>
 
-<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>news-list<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
-<span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span>
-<span class="pl-s1"><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">"</span>.news-list<span class="pl-pds">"</span></span>).<span class="pl-en">dataRemote</span>({</span>
-<span class="pl-s1">  data<span class="pl-k">:</span> {</span>
-<span class="pl-s1">    page<span class="pl-k">:</span> <span class="pl-c1">1</span>,</span>
-<span class="pl-s1">    count<span class="pl-k">:</span> <span class="pl-c1">20</span>,</span>
-<span class="pl-s1">    type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>videos<span class="pl-pds">'</span></span></span>
-<span class="pl-s1">  }</span>
-<span class="pl-s1">});</span>
-<span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
+        <p>Request data. If this is passed as a html5 attribute, it needs to be a valid JSON string.</p>
 
-<p><em>OR</em></p>
+        <div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>news-list<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+        <span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span>
+        <span class="pl-s1"><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">"</span>.news-list<span class="pl-pds">"</span></span>).<span class="pl-en">dataRemote</span>({</span>
+        <span class="pl-s1">  data<span class="pl-k">:</span> {</span>
+        <span class="pl-s1">    page<span class="pl-k">:</span> <span class="pl-c1">1</span>,</span>
+        <span class="pl-s1">    count<span class="pl-k">:</span> <span class="pl-c1">20</span>,</span>
+        <span class="pl-s1">    type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>videos<span class="pl-pds">'</span></span></span>
+        <span class="pl-s1">  }</span>
+        <span class="pl-s1">});</span>
+        <span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
 
-<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>news-list<span class="pl-pds">"</span></span> <span class="pl-e">data-data</span>=<span class="pl-s"><span class="pl-pds">'</span>{"page": 2, "count": 20, "type": "videos"}<span class="pl-pds">'</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
-<span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span>
-<span class="pl-s1"><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">"</span>.news-list<span class="pl-pds">"</span></span>).<span class="pl-en">dataRemote</span>();</span>
-<span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
+        <p><em>OR</em></p>
 
-<h4>
-<a id="datatype-string-default-json" class="anchor" href="#datatype-string-default-json" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>dataType {String} (default: <code>'json'</code>)</h4>
+        <div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>news-list<span class="pl-pds">"</span></span> <span class="pl-e">data-data</span>=<span class="pl-s"><span class="pl-pds">'</span>{"page": 2, "count": 20, "type": "videos"}<span class="pl-pds">'</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+        <span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span>
+        <span class="pl-s1"><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">"</span>.news-list<span class="pl-pds">"</span></span>).<span class="pl-en">dataRemote</span>();</span>
+        <span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
 
-<p>The type of response data you're expecting. Can be any dataType value supported by <a href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>.</p>
+        <h4>
+        <a id="datatype-string-default-json" class="anchor" href="#datatype-string-default-json" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>dataType {String} (default: <code>'json'</code>)</h4>
 
-<h4>
-<a id="debug-boolean-default-false" class="anchor" href="#debug-boolean-default-false" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>debug {Boolean} (default: <code>false</code>)</h4>
+        <p>The type of response data you're expecting. Can be any dataType value supported by <a href="http://api.jquery.com/jquery.ajax/">jQuery.ajax</a>.</p>
 
-<p>Turn debugging on/off. Will output errors/notices to the console.</p>
+        <h4>
+        <a id="debug-boolean-default-false" class="anchor" href="#debug-boolean-default-false" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>debug {Boolean} (default: <code>false</code>)</h4>
 
-<h4>
-<a id="eventtype-string-default-load" class="anchor" href="#eventtype-string-default-load" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>eventType {String} (default: <code>'load'</code>)</h4>
+        <p>Turn debugging on/off. Will output errors/notices to the console.</p>
 
-<p>The event type to fire data request on. Can be any event type that is supported by jQuery, including custom events.</p>
+        <h4>
+        <a id="eventtype-string-default-load" class="anchor" href="#eventtype-string-default-load" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>eventType {String} (default: <code>'load'</code>)</h4>
 
-<h4>
-<a id="handlebars-boolean-default-false" class="anchor" href="#handlebars-boolean-default-false" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>handlebars {Boolean} (default: <code>false</code>)</h4>
+        <p>The event type to fire data request on. Can be any event type that is supported by jQuery, including custom events.</p>
 
-<p>Whether to use handlebars templating engine.</p>
+        <h4>
+        <a id="handlebars-boolean-default-false" class="anchor" href="#handlebars-boolean-default-false" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>handlebars {Boolean} (default: <code>false</code>)</h4>
 
-<h4>
-<a id="loaderimg-string-default-null" class="anchor" href="#loaderimg-string-default-null" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>loaderImg {String} (default: <code>null</code>)</h4>
+        <p>Whether to use handlebars templating engine.</p>
 
-<p>Source of an optional loader image. When you want a loader image to appear in the target element, while the ajax request is being made. You are responsible for styling how you want, however.</p>
+        <h4>
+        <a id="loaderimg-string-default-null" class="anchor" href="#loaderimg-string-default-null" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>loaderImg {String} (default: <code>null</code>)</h4>
 
-<div class="highlight highlight-text-html-basic"><pre><span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span>
-<span class="pl-s1"><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">"</span>.news-list<span class="pl-pds">"</span></span>).<span class="pl-en">dataRemote</span>({</span>
-<span class="pl-s1">  loaderImg<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>/images/loader.gif<span class="pl-pds">'</span></span></span>
-<span class="pl-s1">});</span>
-<span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
+        <p>Source of an optional loader image. When you want a loader image to appear in the target element, while the ajax request is being made. You are responsible for styling how you want, however.</p>
 
-<h4>
-<a id="handlebars-boolean-default-false-1" class="anchor" href="#handlebars-boolean-default-false-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>handlebars {Boolean} (default: <code>false</code>)</h4>
+        <div class="highlight highlight-text-html-basic"><pre><span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span>
+        <span class="pl-s1"><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">"</span>.news-list<span class="pl-pds">"</span></span>).<span class="pl-en">dataRemote</span>({</span>
+        <span class="pl-s1">  loaderImg<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>/images/loader.gif<span class="pl-pds">'</span></span></span>
+        <span class="pl-s1">});</span>
+        <span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
 
-<p>Whether to use handlebars templating engine. If you put a handlebars template within the target element, Handlebars will be used, regardless of this options' value.</p>
+        <h4>
+        <a id="handlebars-boolean-default-false-1" class="anchor" href="#handlebars-boolean-default-false-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>handlebars {Boolean} (default: <code>false</code>)</h4>
 
-<h4>
-<a id="method-string-default-get" class="anchor" href="#method-string-default-get" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>method {String} (default: <code>GET</code>)</h4>
+        <p>Whether to use handlebars templating engine. If you put a handlebars template within the target element, Handlebars will be used, regardless of this options' value.</p>
 
-<p>The HTTP method to use for the request (e.g. "POST", "GET", "PUT") Can be any request type supported by jQuery.</p>
+        <h4>
+        <a id="method-string-default-get" class="anchor" href="#method-string-default-get" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>method {String} (default: <code>GET</code>)</h4>
 
-<h4>
-<a id="oneanddone-boolean-default-true" class="anchor" href="#oneanddone-boolean-default-true" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>oneAndDone {Boolean} (default: <code>true</code>)</h4>
+        <p>The HTTP method to use for the request (e.g. "POST", "GET", "PUT") Can be any request type supported by jQuery.</p>
 
-<p>Whether to remove the event binding after the initial request.</p>
+        <h4>
+        <a id="oneanddone-boolean-default-true" class="anchor" href="#oneanddone-boolean-default-true" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>oneAndDone {Boolean} (default: <code>true</code>)</h4>
 
-<h4>
-<a id="placement-string-default-html" class="anchor" href="#placement-string-default-html" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>placement {String} (default: <code>html</code>)</h4>
+        <p>Whether to remove the event binding after the initial request.</p>
 
-<p>Where to inject response relative to target (uses jQuery DOM insertion methods. Can be 'html', 'append', 'prepend', 'before' or 'after').</p>
+        <h4>
+        <a id="placement-string-default-html" class="anchor" href="#placement-string-default-html" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>placement {String} (default: <code>html</code>)</h4>
 
-<h4>
-<a id="target-string-default-elementselector" class="anchor" href="#target-string-default-elementselector" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>target {String} (default: <code>$(element).selector</code>)</h4>
+        <p>Where to inject response relative to target (uses jQuery DOM insertion methods. Can be 'html', 'append', 'prepend', 'before' or 'after').</p>
 
-<p>Selector of the element where you want your response injected. By default it's assumed that the target is the element that data remote has been initialized on.</p>
+        <h4>
+        <a id="target-string-default-elementselector" class="anchor" href="#target-string-default-elementselector" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>target {String} (default: <code>$(element).selector</code>)</h4>
 
-<h4>
-<a id="template-string-default-" class="anchor" href="#template-string-default-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>template {String} (default: <code>''</code>)</h4>
+        <p>Selector of the element where you want your response injected. By default it's assumed that the target is the element that data remote has been initialized on.</p>
 
-<p>Selector of the handlebars template. By default it will look inside target element for the template.</p>
+        <h4>
+        <a id="template-string-default-" class="anchor" href="#template-string-default-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>template {String} (default: <code>''</code>)</h4>
 
-<h4>
-<a id="type-string-default-get" class="anchor" href="#type-string-default-get" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>type {String} (default: <code>'GET'</code>)</h4>
+        <p>Selector of the handlebars template. By default it will look inside target element for the template.</p>
 
-<p>Alias for method.</p>
+        <h4>
+        <a id="type-string-default-get" class="anchor" href="#type-string-default-get" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>type {String} (default: <code>'GET'</code>)</h4>
 
-<h4>
-<a id="debounceevents-array-default-keyup-keydown-keypress-scroll-resize" class="anchor" href="#debounceevents-array-default-keyup-keydown-keypress-scroll-resize" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>debounceEvents {Array} (default: <code>['keyup', 'keydown', 'keypress', 'scroll', 'resize']</code>)</h4>
+        <p>Alias for method.</p>
 
-<p>A list of event types that will cause the execution of the main callback function to be <a href="http://davidwalsh.name/javascript-debounce-function">debounced</a>. The default events provided are one's that can typically get fired in rapid succession and cause jank. You cannot provide this option as a data attribute. Custom events can be provided.</p>
+        <h4>
+        <a id="debounceevents-array-default-keyup-keydown-keypress-scroll-resize" class="anchor" href="#debounceevents-array-default-keyup-keydown-keypress-scroll-resize" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>debounceEvents {Array} (default: <code>['keyup', 'keydown', 'keypress', 'scroll', 'resize']</code>)</h4>
 
-<div class="highlight highlight-text-html-basic"><pre><span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span>
-<span class="pl-s1"><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">"</span>.news-list<span class="pl-pds">"</span></span>).<span class="pl-en">dataRemote</span>({</span>
-<span class="pl-s1">  debounceEvents<span class="pl-k">:</span> [<span class="pl-s"><span class="pl-pds">'</span>scroll<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>gesturechange<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>orientationchange<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>customresize<span class="pl-pds">'</span></span>]</span>
-<span class="pl-s1">});</span>
-<span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
+        <p>A list of event types that will cause the execution of the main callback function to be <a href="http://davidwalsh.name/javascript-debounce-function">debounced</a>. The default events provided are one's that can typically get fired in rapid succession and cause jank. You cannot provide this option as a data attribute. Custom events can be provided.</p>
 
-<h2>
-<a id="callbacks" class="anchor" href="#callbacks" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Callbacks</h2>
+        <div class="highlight highlight-text-html-basic"><pre><span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span>
+        <span class="pl-s1"><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">"</span>.news-list<span class="pl-pds">"</span></span>).<span class="pl-en">dataRemote</span>({</span>
+        <span class="pl-s1">  debounceEvents<span class="pl-k">:</span> [<span class="pl-s"><span class="pl-pds">'</span>scroll<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>gesturechange<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>orientationchange<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>customresize<span class="pl-pds">'</span></span>]</span>
+        <span class="pl-s1">});</span>
+        <span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
 
-<h4>
-<a id="before-function-default-functiontarget-" class="anchor" href="#before-function-default-functiontarget-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>before {Function} (default: <code>function($target) {}</code>)</h4>
+        <h2>
+        <a id="callbacks" class="anchor" href="#callbacks" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Callbacks</h2>
 
-<p>Before callback. Fires directly before the request is made. Default is an empty function.</p>
+        <h4>
+        <a id="before-function-default-functiontarget-" class="anchor" href="#before-function-default-functiontarget-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>before {Function} (default: <code>function($target) {}</code>)</h4>
 
-<h4>
-<a id="complete-function-default-functiontarget-" class="anchor" href="#complete-function-default-functiontarget-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>complete {Function} (default: <code>function($target) {}</code>)</h4>
+        <p>Before callback. Fires directly before the request is made. Default is an empty function.</p>
 
-<p>Complete callback. Fires after request, on success or error. Default is an empty function.</p>
+        <h4>
+        <a id="complete-function-default-functiontarget-" class="anchor" href="#complete-function-default-functiontarget-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>complete {Function} (default: <code>function($target) {}</code>)</h4>
 
-<h4>
-<a id="error-function-default-errorcallbacktarget-options-response-error" class="anchor" href="#error-function-default-errorcallbacktarget-options-response-error" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>error {Function} (default: <code>errorCallback($target, options, response, error)</code>)</h4>
+        <p>Complete callback. Fires after request, on success or error. Default is an empty function.</p>
 
-<p>Error callback. Fires if the ajax request fails. Takes 4 arguments. Default error callback (<code>errorCallback()</code>) handles error reporting is <code>debug</code> is true.</p>
+        <h4>
+        <a id="error-function-default-errorcallbacktarget-options-response-error" class="anchor" href="#error-function-default-errorcallbacktarget-options-response-error" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>error {Function} (default: <code>errorCallback($target, options, response, error)</code>)</h4>
 
-<h4>
-<a id="success-function-default-successcallbacktarget-options-response" class="anchor" href="#success-function-default-successcallbacktarget-options-response" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>success {Function} (default: <code>successCallback($target, options, response)</code>)</h4>
+        <p>Error callback. Fires if the ajax request fails. Takes 4 arguments. Default error callback (<code>errorCallback()</code>) handles error reporting is <code>debug</code> is true.</p>
 
-<p>Success callback. Fires on the success of the ajax request. Takes 3 arguments. The default success callback (<code>successCallback()</code>) handles templating the response.</p>
+        <h4>
+        <a id="success-function-default-successcallbacktarget-options-response" class="anchor" href="#success-function-default-successcallbacktarget-options-response" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>success {Function} (default: <code>successCallback($target, options, response)</code>)</h4>
 
-<h2>
-<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Demo</h2>
+        <p>Success callback. Fires on the success of the ajax request. Takes 3 arguments. The default success callback (<code>successCallback()</code>) handles templating the response.</p>
 
-<p>To view the demo, run the following:</p>
+        <h2>
+        <a id="demo" class="anchor" href="#demo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Demo</h2>
 
-<div class="highlight highlight-source-shell"><pre>$ gulp demo</pre></div>
+        <p>To view the demo, run the following:</p>
 
-<h2>
-<a id="in-development" class="anchor" href="#in-development" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>In Development</h2>
+        <div class="highlight highlight-source-shell"><pre>$ gulp demo</pre></div>
 
-<ol>
-<li>Support for multiple templating engines</li>
-<li>Add better support for POST requests (they're very possible, but should we make assumptions about the data to send by default? i.e. grab all form values)</li>
-<li>Add support for authenticated requests</li>
-<li>Add better error handling</li>
-<li><del>Add a node server via gulp, so you can use that to serve the demo, with a simple <code>gulp serve</code></del></li>
-</ol>
+        <h2>
+        <a id="in-development" class="anchor" href="#in-development" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>In Development</h2>
+
+        <ol>
+        <li>Support for multiple templating engines</li>
+        <li>Add better support for POST requests (they're very possible, but should we make assumptions about the data to send by default? i.e. grab all form values)</li>
+        <li>Add support for authenticated requests</li>
+        <li>Add better error handling</li>
+        <li><del>Add a node server via gulp, so you can use that to serve the demo, with a simple <code>gulp serve</code></del></li>
+        </ol>
       </section>
+
       <footer>
         <p>This project is maintained by <a href="https://github.com/codfish">codfish</a></p>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-74713209-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
 
+    <script src="javascripts/scale.fix.js"></script>
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+
+    <script type="text/javascript">
+      try {
+        var pageTracker = _gat._getTracker("UA-74713209-1");
+        pageTracker._trackPageview();
+      } catch(err) {}
+    </script>
   </body>
 </html>
