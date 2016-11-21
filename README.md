@@ -15,10 +15,10 @@ jQuery Data Remote is a plugin that simplifies the common task of making api/rem
 
 ## Usage
 
-1) Here's a great example of how this plugin can help minimize the amount of work you need to do in order to make an ajax request and handle the results. Here's an api request to githubs' gists api, using handlebars for templating (optional). This also leverages all of the default options (event type of 'load', data type of json, request type of GET, etc. See [Options](#options) for more details).
+Here's a great example of how this plugin can help minimize the amount of work you need to do in order to make an ajax request and handle the results. Here's an api request to githubs' gists api, using handlebars for templating (optional). This also leverages all of the default options (event type of 'load', data type of json, request type of GET, etc. See [Options](#options) for more details).
 
   ```html
-  <div data-remote="true" data-url="https://api.github.com/users/codfish/gists">
+  <div data-url="https://api.github.com/users/codfish/gists">
     <script type="text/x-handlebars-template">
       <ul>
         {{#each this}}
@@ -32,24 +32,18 @@ jQuery Data Remote is a plugin that simplifies the common task of making api/rem
   </div>
   ```
 
+  ```js
+  $('div').dataRemote()
+  ```
+
 Almost all options can be set via html5 data attributes, or passed into the plugin initialization, or a mixture of both. Note html5 data attributes take precedence, so if you wanted to, you can initialize data remote with options, and then override options on any specific element using data attributes. See the following example:
 
-1) Here's an example with 3 elements getting initialized together, but showing the ability to override options with data attributes.
-
-  - First, here's the plugin initialization. Initialize all of the `.get-news` elements with data remote options you want.
-
-  ```js
-  $(document).ready(function() {
-    $('.get-news').dataRemote({
-      url: 'http://api.example.com/news',
-    });
-  });
-  ```
+Here's an example with 3 elements getting initialized together, but showing the ability to override options with data attributes.
 
   - Here's the first element, a wrapper element with no data attributes. Leverages the default options of the plugin, as well as the options you specify below in the plugin call.
 
   ```html
-  <ul class="news-list-wrapper" class="get-news">
+  <ul class="get-news">
     <script type="text/x-handlebars-template">
       {{#each news_items}}
         <li>
@@ -60,8 +54,14 @@ Almost all options can be set via html5 data attributes, or passed into the plug
     </script>
   </ul>
   ```
+  
+  ```js
+  $('.get-news').dataRemote({
+    url: 'http://api.example.com/news',
+  });
+  ```
 
-  - Now we add a link to the page to allow the user to load more news. Overrides request url adding page param
+  - Now we add a link to the page to allow the user to load more news. This will **override** the request url specified in the options object we passed in when we initialized the plugin.
 
   ```html
   <a class="get-news"
@@ -73,20 +73,6 @@ Almost all options can be set via html5 data attributes, or passed into the plug
       Load More News
   </a>
   ```
-
-  - override request url
-
-  ```html
-  <a class="get-news"
-     data-url=""
-     data-target=".news-list-wrapper"
-     data-event-type="click"
-     data-url="http://api.example.com/news?category=funny"
-  >
-    Display Funny News Instead
-  </a>
-  ```
-
 
 ## Options
 
