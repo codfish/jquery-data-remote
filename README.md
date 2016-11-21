@@ -1,4 +1,4 @@
-# jQuery Data Remote Plugin
+# jquery-data-remote
 
 jQuery Data Remote is a plugin that simplifies the common task of making api/remote requests and injecting the response to the page. Optionally leverages Handlebars.js for templating. Inpired by ruby on rails' unobtrusive scripting adapter for jQuery (https://github.com/rails/jquery-ujs).
 
