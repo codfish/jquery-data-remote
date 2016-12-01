@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Jquery-data-remote by codfish</title>
+    <title>jQuery data-remote Plugin</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/github-light.css">
@@ -15,7 +15,7 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Jquery Data Remote</h1>
+        <h1>jquery-data-remote</h1>
 
         <p>jQuery plugin that simplifies the common task of making api/remote requests and injecting the response to the page. Optionally leverages Handlebars.js for templating. Inpired by ruby on rails&#39; unobtrusive scripting adapter for jQuery (https://github.com/rails/jquery-ujs).</p>
 
@@ -74,24 +74,24 @@
         <p>First, here's the plugin initialization. Initialize all of the <code>.get-news</code> elements with data remote options you want.</p>
 
         <div class="highlight highlight-source-js"><pre><span class="pl-en">$</span>(<span class="pl-c1">document</span>).<span class="pl-en">ready</span>(<span class="pl-k">function</span>() {
-          <span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>.get-news<span class="pl-pds">'</span></span>).<span class="pl-en">dataRemote</span>({
-            url<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>http://api.example.com/news<span class="pl-pds">'</span></span>,
-          });
-        });</pre></div>
+  <span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>.get-news<span class="pl-pds">'</span></span>).<span class="pl-en">dataRemote</span>({
+    url<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>http://api.example.com/news<span class="pl-pds">'</span></span>,
+  });
+});</pre></div>
         </li>
         <li>
         <p>Here's the first element, a wrapper element with no data attributes. Leverages the default options of the plugin, as well as the options you specify below in the plugin call.</p>
 
         <div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">ul</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>news-list-wrapper<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>get-news<span class="pl-pds">"</span></span>&gt;
-          &lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/x-handlebars-template<span class="pl-pds">"</span></span>&gt;
-            {{#each news_items}}
-              &lt;<span class="pl-ent">li</span>&gt;
-                &lt;<span class="pl-ent">h3</span>&gt;&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>{{ url }}<span class="pl-pds">"</span></span> <span class="pl-e">target</span>=<span class="pl-s"><span class="pl-pds">"</span>_blank<span class="pl-pds">"</span></span>&gt;{{ url }}&lt;/<span class="pl-ent">a</span>&gt;&lt;/<span class="pl-ent">h3</span>&gt;
-                &lt;<span class="pl-ent">p</span>&gt;{{ dek }}&lt;/<span class="pl-ent">p</span>&gt;
-              &lt;/<span class="pl-ent">li</span>&gt;
-            {{/each}}
-          &lt;/<span class="pl-ent">script</span>&gt;
-        &lt;/<span class="pl-ent">ul</span>&gt;</pre></div>
+  &lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/x-handlebars-template<span class="pl-pds">"</span></span>&gt;
+    {{#each news_items}}
+      &lt;<span class="pl-ent">li</span>&gt;
+        &lt;<span class="pl-ent">h3</span>&gt;&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>{{ url }}<span class="pl-pds">"</span></span> <span class="pl-e">target</span>=<span class="pl-s"><span class="pl-pds">"</span>_blank<span class="pl-pds">"</span></span>&gt;{{ url }}&lt;/<span class="pl-ent">a</span>&gt;&lt;/<span class="pl-ent">h3</span>&gt;
+        &lt;<span class="pl-ent">p</span>&gt;{{ dek }}&lt;/<span class="pl-ent">p</span>&gt;
+      &lt;/<span class="pl-ent">li</span>&gt;
+    {{/each}}
+  &lt;/<span class="pl-ent">script</span>&gt;
+&lt;/<span class="pl-ent">ul</span>&gt;</pre></div>
         </li>
         <li>
         <p>Now we add a link to the page to allow the user to load more news. Overrides request url adding page param</p>
