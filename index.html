@@ -45,25 +45,25 @@
           <a href="http://bower.io/">Bower</a>: <code>bower install --save jquery-data-remote</code>
           </li>
           <li><a href="https://cdnjs.com/libraries/jquery-data-remote">cdnjs</a></li>
-          <li><a href="https://github.com/codfish/jquery-data-remote/releases">Download the latest release on Github</a></li>
+          <li><a href="https://github.com/codfish/jquery-data-remote/releases/latest">Download the latest release on Github</a></li>
         </ul>
 
         <h2><a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
 
         <p>1) Here's a great example of how this plugin can help minimize the amount of work you need to do in order to make an ajax request and handle the results. Here's an api request to githubs' gists api, using handlebars for templating (optional). This also leverages all of the default options (event type of 'load', data type of json, request type of GET, etc. See <a href="#options">Options</a> for more details).</p>
 
-        <div class="highlight highlight-text-html-basic"><pre>  &lt;<span class="pl-ent">div</span> <span class="pl-e">data-remote</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> <span class="pl-e">data-url</span>=<span class="pl-s"><span class="pl-pds">"</span>https://api.github.com/users/codfish/gists<span class="pl-pds">"</span></span>&gt;
-            &lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/x-handlebars-template<span class="pl-pds">"</span></span>&gt;
-              &lt;<span class="pl-ent">ul</span>&gt;
-                {{#each this}}
-                  &lt;<span class="pl-ent">li</span>&gt;
-                    &lt;<span class="pl-ent">h3</span>&gt;&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>{{ html_url }}<span class="pl-pds">"</span></span> <span class="pl-e">target</span>=<span class="pl-s"><span class="pl-pds">"</span>_blank<span class="pl-pds">"</span></span>&gt;{{ html_url }}&lt;/<span class="pl-ent">a</span>&gt;&lt;/<span class="pl-ent">h3</span>&gt;
-                    &lt;<span class="pl-ent">p</span>&gt;{{ description }}&lt;/<span class="pl-ent">p</span>&gt;
-                  &lt;/<span class="pl-ent">li</span>&gt;
-                {{/each}}
-              &lt;/<span class="pl-ent">ul</span>&gt;
-            &lt;/<span class="pl-ent">script</span>&gt;
-          &lt;/<span class="pl-ent">div</span>&gt;</pre></div>
+        <div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">div</span> <span class="pl-e">data-remote</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> <span class="pl-e">data-url</span>=<span class="pl-s"><span class="pl-pds">"</span>https://api.github.com/users/codfish/gists<span class="pl-pds">"</span></span>&gt;
+  &lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/x-handlebars-template<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">ul</span>&gt;
+      {{#each this}}
+        &lt;<span class="pl-ent">li</span>&gt;
+          &lt;<span class="pl-ent">h3</span>&gt;&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>{{ html_url }}<span class="pl-pds">"</span></span> <span class="pl-e">target</span>=<span class="pl-s"><span class="pl-pds">"</span>_blank<span class="pl-pds">"</span></span>&gt;{{ html_url }}&lt;/<span class="pl-ent">a</span>&gt;&lt;/<span class="pl-ent">h3</span>&gt;
+          &lt;<span class="pl-ent">p</span>&gt;{{ description }}&lt;/<span class="pl-ent">p</span>&gt;
+        &lt;/<span class="pl-ent">li</span>&gt;
+      {{/each}}
+    &lt;/<span class="pl-ent">ul</span>&gt;
+  &lt;/<span class="pl-ent">script</span>&gt;
+&lt;/<span class="pl-ent">div</span>&gt;</pre></div>
 
         <p>Almost all options can be set via html5 data attributes, or passed into the plugin initialization, or a mixture of both. Note html5 data attributes take precedence, so if you wanted to, you can initialize data remote with options, and then override options on any specific element using data attributes. See the following example:</p>
 
