@@ -76,7 +76,7 @@ Here's an example with 3 elements getting initialized together, but showing the 
 
 ## Options
 
-#### url {String} (default: `null`)
+#### url {string} (default: `null`)
 
 **REQUIRED** API Request URL. Can be absolute or relative. Cross browser requests obviously adhere to CORS. For cross browser requests, you must either set the `dataType` option to `jsonp` or the API request must be to a public api/endpoint.
 
@@ -123,23 +123,23 @@ $(".news-list").dataRemote();
 </script>
 ```
 
-#### dataType {String} (default: `'json'`)
+#### dataType {string} (default: `'json'`)
 
 The type of response data you're expecting. Can be any dataType value supported by [jQuery.ajax](http://api.jquery.com/jquery.ajax/).
 
-#### debug {Boolean} (default: `false`)
+#### debug {boolean} (default: `false`)
 
 Turn debugging on/off. Will output errors/notices to the console.
 
-#### eventType {String} (default: `'load'`)
+#### eventType {string} (default: `'load'`)
 
 The event type to fire data request on. Can be any event type that is supported by jQuery, including custom events.
 
-#### handlebars {Boolean} (default: `false`)
+#### handlebars {boolean} (default: `false`)
 
-Whether to use handlebars templating engine.
+Whether to use handlebars templating engine. If you put a handlebars template within the target element, Handlebars will be used, regardless of this options' value.
 
-#### loaderImg {String} (default: `null`)
+#### loaderImg {string} (default: `null`)
 
 Source of an optional loader image. When you want a loader image to appear in the target element, while the ajax request is being made. You are responsible for styling how you want, however.
 
@@ -151,31 +151,27 @@ $(".news-list").dataRemote({
 </script>
 ```
 
-#### handlebars {Boolean} (default: `false`)
-
-Whether to use handlebars templating engine. If you put a handlebars template within the target element, Handlebars will be used, regardless of this options' value.
-
-#### method {String} (default: `GET`)
+#### method {string} (default: `GET`)
 
 The HTTP method to use for the request (e.g. "POST", "GET", "PUT") Can be any request type supported by jQuery.
 
-#### oneAndDone {Boolean} (default: `true`)
+#### oneAndDone {boolean} (default: `true`)
 
 Whether to remove the event binding after the initial request.
 
-#### placement {String} (default: `html`)
+#### placement {string} (default: `html`)
 
 Where to inject response relative to target (uses jQuery DOM insertion methods. Can be 'html', 'append', 'prepend', 'before' or 'after').
 
-#### target {String} (default: `$(element).selector`)
+#### target {string} (default: `$(element).selector`)
 
 Selector of the element where you want your response injected. By default it's assumed that the target is the element that data remote has been initialized on.
 
-#### template {String} (default: `''`)
+#### template {string} (default: `''`)
 
 Selector of the handlebars template. By default it will look inside target element for the template.
 
-#### type {String} (default: `'GET'`)
+#### type {string} (default: `'GET'`)
 
 Alias for method.
 
