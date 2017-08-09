@@ -83,23 +83,6 @@ gulp.task('demo', ['uglify'], function() {
   });
 });
 
-/**
- * Build Release
- *
- * @see https://www.npmjs.com/package/gulp-zip
- */
-gulp.task('release', function () {
-  gulp.src([
-      '!node_modules',
-      '!node_modules/**/*',
-      '!build',
-      '!build/**/*',
-      '**/*',
-    ])
-    .pipe(zip(config.filename.replace('.js', '.zip')))
-    .pipe(gulp.dest(config.build));
-});
-
 gulp.task('serve', ['demo']);
 gulp.task('build', ['uglify']);
 gulp.task('default', ['build']);
