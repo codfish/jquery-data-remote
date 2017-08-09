@@ -1,17 +1,21 @@
 language: node_js
+
 node_js:
-- '0.12'
+  - 'node'
+
 install:
-- npm install
+  - npm install
+
 script:
-- gulp
+  - gulp
+
 deploy:
-  provider: npm
-  email: codonnell822+npm@outlook.com
-  skip_cleanup: true
-  api_key:
-    secure: Ng7wOISWrshx3J6yh9EIdJl3/zLLT7LGx9Qm6DGZLIwH0hxIjcI/YVygpHQ+dOjzSCop1xqsZrx7oN3PTkVvfC1zVFpGXnFNBXPDPZ+5stMW7Canj1SVo+OiA2cqWvz/h3CCk/Zqc0SSJuz/KywbOE8fLGrfWgADqLhNB2dTjN0IcExDhtairO6fXs876oxc8Z24Vtn8Ye73BiZ605U+2irBTsnuz5MXvjv9/ttCFSJ4unkbo6LwZQYOjK33iJw4BxNOPE2RzXoB/KXzn5wOkJaYVkMhMIyf2AqLHkGN6QRmI7hS08Tin26YZvfU/SbV9gUcDHEcGXQhgiZG8MyjZJeMtZCJe/8Dku7TOot4uZI9Q2J44WG6WRnwJvPxbXsCsu+SP3jXei2YzYJfPdBDN+EppZIkEUzEGflekunmnzZvLqysdneFT/tEr7zUwzu0Z2dkR+FskAUR+xuReKSpMuH/8d+ES3cnfZMqrTmv855TNim320xrTmLtfIU7JE9nOpEhQWYf9Q0VVDberQ6QJ/xq/xnlJQwkkDHAz8sRBSSyB0qiXiiJfvsf97Sn9C1ZHPG32aHkKMxbXMaCJnAon47XNRTmh+G+f6HrBgXJNZ2MOiQSxC3qxIZcVLt5Fen008W5zmFjrksM1q54JdABJb4drSOxq9n8G8jPyxi87Eg=
-  on:
-    tags: true
-    branch: master
-    repo: codfish/jquery-data-remote
+  - provider: npm
+    email: codonnell822+npm@outlook.com
+    skip_cleanup: true
+    api_key:
+      secure: Ng7wOISWrshx3J6yh9EIdJl3/zLLT7LGx9Qm6DGZLIwH0hxIjcI/YVygpHQ+dOjzSCop1xqsZrx7oN3PTkVvfC1zVFpGXnFNBXPDPZ+5stMW7Canj1SVo+OiA2cqWvz/h3CCk/Zqc0SSJuz/KywbOE8fLGrfWgADqLhNB2dTjN0IcExDhtairO6fXs876oxc8Z24Vtn8Ye73BiZ605U+2irBTsnuz5MXvjv9/ttCFSJ4unkbo6LwZQYOjK33iJw4BxNOPE2RzXoB/KXzn5wOkJaYVkMhMIyf2AqLHkGN6QRmI7hS08Tin26YZvfU/SbV9gUcDHEcGXQhgiZG8MyjZJeMtZCJe/8Dku7TOot4uZI9Q2J44WG6WRnwJvPxbXsCsu+SP3jXei2YzYJfPdBDN+EppZIkEUzEGflekunmnzZvLqysdneFT/tEr7zUwzu0Z2dkR+FskAUR+xuReKSpMuH/8d+ES3cnfZMqrTmv855TNim320xrTmLtfIU7JE9nOpEhQWYf9Q0VVDberQ6QJ/xq/xnlJQwkkDHAz8sRBSSyB0qiXiiJfvsf97Sn9C1ZHPG32aHkKMxbXMaCJnAon47XNRTmh+G+f6HrBgXJNZ2MOiQSxC3qxIZcVLt5Fen008W5zmFjrksM1q54JdABJb4drSOxq9n8G8jPyxi87Eg=
+    on:
+      tags: true
+      branch: master
+      repo: codfish/jquery-data-remote
