@@ -2,6 +2,5 @@
 node_modules
 demo
 components
-bower.json
 .editorconfig
 build

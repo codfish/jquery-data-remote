@@ -24,6 +24,9 @@
     "url": "https://github.com/codfish/jquery-data-remote/issues"
   },
   "homepage": "https://github.com/codfish/jquery-data-remote",
+  "dependencies": {
+    "jquery": ">=1.7"
+  },
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-babel": "^5.1.0",
