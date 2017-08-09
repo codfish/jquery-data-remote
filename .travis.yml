@@ -4,10 +4,10 @@ node_js:
   - 'node'
 
 install:
-  - npm install
+  - yarn install --frozen-lockfile
 
 script:
-  - gulp
+  - yarn run build
 
 deploy:
   - provider: npm
