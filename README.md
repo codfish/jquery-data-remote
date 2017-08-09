@@ -1,17 +1,15 @@
 # jquery-data-remote
 
-jQuery Data Remote is a plugin that simplifies the common task of making api/remote requests and injecting the response to the page. Optionally leverages Handlebars.js for templating. Inpired by ruby on rails' unobtrusive scripting adapter for jQuery (https://github.com/rails/jquery-ujs).
+jquery-data-remote is a plugin that simplifies the common task of making api/remote requests and injecting the response to the page. Optionally leverages Handlebars.js for templating. Inspired by ruby on rails' unobtrusive scripting adapter for jQuery (https://github.com/rails/jquery-ujs).
 
 [![Travis build status](https://api.travis-ci.org/codfish/jquery-data-remote.svg?branch=master)](https://travis-ci.org/codfish/jquery-data-remote)
 
-
 ## Install
 
+* [yarn](https://yarnpkg.com/en/package/jquery-data-remote): `yarn add jquery-data-remote`
 * [npm](http://npmjs.org/package/jquery-data-remote): `npm install --save jquery-data-remote`
-* [Bower](http://bower.io/): `bower install --save jquery-data-remote`
 * [cdnjs](https://cdnjs.com/libraries/jquery-data-remote)
 * [Download the latest release on Github](https://github.com/codfish/jquery-data-remote/releases)
-
 
 ## Usage
 
@@ -54,7 +52,7 @@ Here's an example with 3 elements getting initialized together, but showing the 
     </script>
   </ul>
   ```
-  
+
   ```js
   $('.get-news').dataRemote({
     url: 'http://api.example.com/news',
@@ -68,17 +66,14 @@ Here's an example with 3 elements getting initialized together, but showing the 
      data-target=".news-list-wrapper"
      data-event-type="click"
      data-placement="append"
-     data-url="http://api.example.com/news?page=2"
-  >
-      Load More News
-  </a>
+     data-url="http://api.example.com/news?page=2">Load More News</a>
   ```
 
 ## Options
 
-#### url {string} (default: `null`)
+#### url {string} (**Required**)
 
-**REQUIRED** API Request URL. Can be absolute or relative. Cross browser requests obviously adhere to CORS. For cross browser requests, you must either set the `dataType` option to `jsonp` or the API request must be to a public api/endpoint.
+API Request URL. Can be absolute or relative. Cross browser requests obviously adhere to CORS. For cross browser requests, you must either set the `dataType` option to `jsonp` or the API request must be to a public api/endpoint.
 
 ```html
 <div data-remote="true" data-url="https://api.github.com/users/codfish/gists"></div>
@@ -206,20 +201,18 @@ Error callback. Fires if the ajax request fails. Takes 4 arguments. Default erro
 
 Success callback. Fires on the success of the ajax request. Takes 3 arguments. The default success callback (`successCallback()`) handles templating the response.
 
-
 ## Demo
 
 To view the demo, run the following:
 
 ```sh
-$ gulp demo
+gulp demo
 ```
-
 
 ## In Development
 
-1. Support for multiple templating engines
-1. Add better support for POST requests (they're very possible, but should we make assumptions about the data to send by default? i.e. grab all form values)
-1. Add support for authenticated requests
-1. Add better error handling
-1. ~~Add a node server via gulp, so you can use that to serve the demo, with a simple `gulp serve`~~
+- [x] ~~Add a node server via gulp, so you can use that to serve the demo, with a simple `gulp serve`~~
+- [ ] Support for multiple templating engines, https://github.com/codfish/jquery-data-remote/issues/5
+- [ ] Add better support for POST requests
+- [ ] Add support for authenticated requests
+- [ ] Add better error handling
