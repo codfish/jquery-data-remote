@@ -4,7 +4,8 @@
   "description": "jquery-data-remote is a plugin that simplifies the common task of making api/remote requests and injecting the response to the page. Optionally leverages Handlebars.js for templating.",
   "main": "dist/jquery.data-remote.min.js",
   "scripts": {
-    "prepublish": "gulp build",
+    "prepublish": "yarn run build",
+    "build": "gulp build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
