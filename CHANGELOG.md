@@ -1,5 +1,6 @@
-# v0.8.4
+# v1.0.0
 
+* [ed5393d](https://github.com/codfish/jquery-data-remote/commit/ed5393d2d64eaa1bb18b6f535e6659c200464710) - Stop tracking dist/ dir & remove bower support <Chris O'Donnell>
 * [9d380e5](https://github.com/codfish/jquery-data-remote/commit/9d380e5e176c11fbedc0a7ff76fbfafc10690e97) - Fix changelog commit links <Chris O'Donnell>
 
 # v0.8.3
