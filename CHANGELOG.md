@@ -1,3 +1,9 @@
+# v1.1.0
+
+* [6fa7b9b](https://github.com/codfish/jquery-data-remote/commit/56daf2d1349e6e99cb567429d9efc93b0dfe120f) - Add yarn & npm lockfiles <Chris O'Donnell>
+* [1e53614](https://github.com/codfish/jquery-data-remote/commit/1e53614df681ab92dfdefcef128d37d657b1f8f3) - Update travis node version <Chris O'Donnell>
+* [de137b0](https://github.com/codfish/jquery-data-remote/commit/de137b0cdabc78c54efbca28a813e62830a69554) - Remove gulp release task <Chris O'Donnell>
+
 # v1.0.0
 
 * [ed5393d](https://github.com/codfish/jquery-data-remote/commit/ed5393d2d64eaa1bb18b6f535e6659c200464710) - Stop tracking dist/ dir & remove bower support <Chris O'Donnell>
