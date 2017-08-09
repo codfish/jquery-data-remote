@@ -1,3 +1,7 @@
+# v1.1.1
+
+* [6fa7b9b](https://github.com/codfish/jquery-data-remote/commit/95362bdd80a76034c71dae8f39a9aa7a7f6c90f4) - Remove outdated gulp-zip import <Chris O'Donnell>
+
 # v1.1.0
 
 * [6fa7b9b](https://github.com/codfish/jquery-data-remote/commit/56daf2d1349e6e99cb567429d9efc93b0dfe120f) - Add yarn & npm lockfiles <Chris O'Donnell>
