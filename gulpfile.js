@@ -5,7 +5,6 @@ var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
 var rimraf = require('rimraf');
 var server = require('gulp-server-livereload');
-var zip = require('gulp-zip');
 var fs = require('fs');
 require('shelljs/global');
 
