@@ -1,12 +1,12 @@
 /**
- * jQuery Data Remote Plugin
- * http://github.com/codfish/jquery-dataremote
- * Copyright 2014-2015, Chris O'Donnell
+ * jquery-data-remote
+ *
+ * @see {@link https://github.com/codfish/jquery-data-remote}
  *
  * jQuery plugin that simplifies the common task of making api/remote requests
- * and injecting the response to the page. Optionally leverages templating
- * engines (handlebars). Inpired by ruby on rails' unobtrusive scripting adapter
- * for jQuery (https://github.com/rails/jquery-ujs).
+ * and injecting the response to the page. Optionally leverages js templating
+ * engines. Inpired by ruby on rails' [unobtrusive scripting adapter for
+ * jQuery](https://github.com/rails/jquery-ujs).
  */
 ;(function ($, window, undefined) {
   'use strict';
@@ -81,14 +81,15 @@
     }
 
     /**
-     * Default error callback for ajax requests
+     * Default error callback for ajax requests.
      *
      * Hides the loader image, triggers debugging if it's turned on.
      *
-     * @param {jQuery} $target   jquery object containing the target element for the ajax response
-     * @param {object} options   plugin options set during instantiation
-     * @param {object} response  data response from the ajax request
-     * @param {string} error     textual portion of the HTTP status, i.e. "Not Found" or "Internal Server Error."
+     * @param {jQuery} $target - Target element for the ajax response.
+     * @param {object} options - Plugin options set during instantiation.
+     * @param {object} response - Data response from the ajax request.
+     * @param {string} error - Textual portion of the HTTP status, i.e. "Not Found" or "Internal Server Error."
+     * @return {undefined}
      */
     function errorCallback($target, options, response, error) {
       $target.find('.loader-image').hide();
@@ -101,10 +102,10 @@
     /**
      * Private helper method for debounce
      *
-     * @param  [function] func      function to debounce
-     * @param  [integer]  wait      amount of time to wait between events
-     * @param  [boolean]  immediate cancels the debounce if True
-     * @return [function] function  function with debounce wrapper
+     * @param {function} func - Function to debounce.
+     * @param {integer} wait - Amount of time to wait between events.
+     * @param {boolean} [immediate] - Cancels the debounce if True.
+     * @return {function} Function with debounce wrapper.
      */
     function debounce(func, wait, immediate) {
       var timeout;
@@ -122,16 +123,14 @@
     }
 
     /**
-     * Private helper method for making the ajax request
+     * Private helper method for making the ajax request.
      *
-     * @param {object} url       request url
-     * @param {object} settings  additional settings for the request
-     * {
-     *    @param {jQuery} element  jQuery object containing the current data remote element
-     *    @param {object} options  data remote plugin options for current data remote element
-     *    @param {jQuery} $target  jQuery object containing the target element to inject response
-     * }
-     * @return {void}
+     * @param {object} url - request url.
+     * @param {object} settings - additional settings for the request.
+     * @param {jQuery} settings.element - jQuery object containing the current data remote element.
+     * @param {object} settings.options - data remote plugin options for current data remote element.
+     * @param {jQuery} settings.$target - jQuery object where response will be injected.
+     * @return {undefined}
      */
     function fetch(url, settings) {
       var $element = settings.element;
@@ -234,7 +233,7 @@
   }; // end $.fn.dataRemote
 
   /**
-   * Helper function for debugging
+   * Helper function for debugging.
    */
   $.fn.dataRemote.debug = function (element, output, error) {
     if (window.console && window.console.log) {
@@ -249,5 +248,4 @@
       window.console.log('------------');
     }
   };
-
 }(jQuery, window));
