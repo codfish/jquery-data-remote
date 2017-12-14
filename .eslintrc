@@ -1,0 +1,21 @@
+{
+  "extends": ["eslint:recommended", "airbnb-base"],
+  "env": {
+    "browser": true,
+    "jquery": true
+  },
+  "globals": {
+    "Handlebars": true
+  },
+  "root": true,
+  "rules": {
+    // override for prettier
+    "function-paren-newline": "off"
+  },
+  "overrides": {
+    "files": "gulpfile.js",
+    "globals": {
+      "cp": true
+    }
+  }
+}

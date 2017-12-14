@@ -1,19 +1,18 @@
-var gulp = require('gulp');
-var babel = require('gulp-babel');
-var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
-var sourcemaps = require('gulp-sourcemaps');
-var rimraf = require('rimraf');
-var server = require('gulp-server-livereload');
-var fs = require('fs');
+const gulp = require('gulp');
+const babel = require('gulp-babel');
+const uglify = require('gulp-uglify');
+const rename = require('gulp-rename');
+const sourcemaps = require('gulp-sourcemaps');
+const rimraf = require('rimraf');
+const server = require('gulp-server-livereload');
+const fs = require('fs');
 require('shelljs/global');
 
-var config = {
+const config = {
   src: './src',
   dist: './dist',
-  build: './build',
   demo: './demo',
-  filename: 'jquery.data-remote.js'
+  filename: 'jquery.data-remote.js',
 };
 
 /**
@@ -21,8 +20,8 @@ var config = {
  *
  * @see https://www.npmjs.com/package/rimraf
  */
-gulp.task('clean', function () {
-  rimraf(config.dist, function (err) {
+gulp.task('clean', () => {
+  rimraf(config.dist, (err) => {
     if (err) throw err;
   });
 });
@@ -32,39 +31,41 @@ gulp.task('clean', function () {
  *
  * @see https://babeljs.io/docs/usage/options/
  */
-gulp.task('babel', ['clean'], function () {
-  return gulp.src(config.src + '/**/*.js')
+gulp.task('babel', ['clean'], () =>
+  gulp
+    .src(`${config.src}/**/*.js`)
     .pipe(sourcemaps.init())
-    .pipe(babel({
-      blacklist: ["useStrict"],
-    }))
+    .pipe(
+      babel({
+        blacklist: ['useStrict'],
+      }),
+    )
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(config.dist));
-});
+    .pipe(gulp.dest(config.dist)),
+);
 
 /**
  * Uglify
  *
  * @see https://www.npmjs.com/package/gulp-uglify#options
  */
-gulp.task('uglify', ['babel'], function () {
-  return gulp.src(config.dist + '/**/*.js')
+gulp.task('uglify', ['babel'], () =>
+  gulp
+    .src(`${config.dist}/**/*.js`)
     .pipe(sourcemaps.init())
     .pipe(uglify())
-    .pipe(rename(function (path) {
-      path.extname = ".min.js"
-    }))
+    .pipe(rename({ suffix: '.min' }))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(config.dist));
-});
+    .pipe(gulp.dest(config.dist)),
+);
 
-gulp.task('demo', ['uglify'], function() {
-  var distFile = config.dist  + '/' + config.filename;
-  var demoFile = config.demo  + '/' + config.filename;
+gulp.task('demo', ['uglify'], () => {
+  const distFile = `${config.dist}/${config.filename}`;
+  const demoFile = `${config.demo}/${config.filename}`;
 
   // copy over latest compiled version of the plugin
   // to the demo directory
-  fs.stat(demoFile, function (err, stats) {
+  fs.stat(demoFile, (err) => {
     // delete existing file from demo dir if it exists
     if (!err) {
       fs.unlinkSync(demoFile);
@@ -74,11 +75,12 @@ gulp.task('demo', ['uglify'], function() {
     cp(distFile, demoFile);
 
     // start the server with demo being the webroot
-    gulp.src(config.demo)
-      .pipe(server({
+    gulp.src(config.demo).pipe(
+      server({
         port: 8080,
-        open: true
-      }));
+        open: true,
+      }),
+    );
   });
 });
 
