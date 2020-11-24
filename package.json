@@ -40,7 +40,7 @@
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0",
     "husky": "^0.14.3",
-    "lint-staged": "^6.0.0",
+    "lint-staged": "^10.5.2",
     "prettier": "1.9.2",
     "rimraf": "^2.4.0",
     "shelljs": "^0.5.1"
